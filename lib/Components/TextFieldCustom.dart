@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import '../Styles/ColorStyle.dart';
 import '../Styles/TextStyles.dart';
-
-
 
 class TextFieldCustomPrefix extends StatelessWidget {
   final TextEditingController? controller;
@@ -59,8 +58,60 @@ class TextFieldCustomPrefix extends StatelessWidget {
           ),
           hintText: hintText,
           hintStyle: textStyle!.apply(color: Colors.grey),
-          prefixIcon: (prefix == null) ? null : prefix
-      ),
+          prefixIcon: (prefix == null) ? null : prefix),
     );
   }
 }
+
+class TextFieldOTP extends StatefulWidget {
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
+
+  TextFieldOTP({
+    Key? key,
+    this.controller,
+    this.focusNode,
+    this.onChanged,
+  }) : super(key: key);
+  @override
+  _TextFieldOTPState createState() => _TextFieldOTPState();
+}
+
+class _TextFieldOTPState extends State<TextFieldOTP> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+        autofocus: true,
+        controller: widget.controller,
+        focusNode: widget.focusNode,
+        textAlign: TextAlign.center,
+        maxLength: 1,
+        keyboardType: TextInputType.number,
+        style: TextStylesProductSans.textStyles_16.apply(color: Colors.white),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.zero,
+          counter: Offstage(),
+          filled: true,
+          fillColor: widget.controller!.text.isEmpty ? Colors.transparent : ColorStyle.primaryColor,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide(color: ColorStyle.grey, width: 1),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4),
+            borderSide: BorderSide(color: ColorStyle.primaryColor, width: 1),
+          ),
+        ),
+        onChanged: (text) {
+          widget.onChanged!(text);
+
+          setState(() {
+
+          });
+        });
+  }
+}
+

@@ -5,15 +5,29 @@ import 'package:inr_d/Components/TextButtonCustom.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';
 import 'package:inr_d/Styles/TextStyles.dart';
 import 'package:get/get.dart';
+import '../Components/AppBarStyle.dart';
+import '../Views/PINScreen.dart';
 
-class OTPScreen extends StatefulWidget {
-  const OTPScreen({Key? key}) : super(key: key);
+
+class PINScreen extends StatefulWidget {
+  String? title;
+  String? desc;
+
+  final int enterSetConfirmPIN;
+  final bool isForgotPINShow;
+
+  PINScreen({Key? key,
+    required this.title,
+    required this.desc,
+    required this.isForgotPINShow,
+    required this.enterSetConfirmPIN,
+  }) : super(key: key);
 
   @override
-  _OTPScreenState createState() => _OTPScreenState();
+  _PINScreenState createState() => _PINScreenState();
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _PINScreenState extends State<PINScreen> {
   final focusNode = FocusNode();
   final textController = TextEditingController();
 
@@ -30,40 +44,11 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        backgroundColor: Colors.transparent,
-        leading: BackButton(
-          color: Colors.grey,
-        ),
-        actions: [
-          Row(
-            children: [
-              Container(
-                height: 36,
-                width: 36,
-                padding: EdgeInsets.zero,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    )
-                ),
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  iconSize: 20,
-                  icon: Icon(Icons.question_mark_rounded, color: Colors.grey,),
-                  onPressed: () {
+      appBar: AppBarStyle(
+        title: '',
+        onTapTrailing: () {
 
-                  },
-                ),
-              ),
-            ],
-          ),
-          SizedBox(width: 16,)
-        ],
+        },
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -74,12 +59,14 @@ class _OTPScreenState extends State<OTPScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Enter your PIN",
+              Text(
+                  widget.title!,
                   style: TextStylesProductSans.textStyles_26),
               SizedBox(
                 height: 10,
               ),
-              Text("Enter the secure PIN to access your account",
+              Text(
+                  widget.desc!,
                   style: TextStylesProductSans.textStyles_14
                       .apply(color: Colors.grey)),
               SizedBox(
@@ -132,15 +119,21 @@ class _OTPScreenState extends State<OTPScreen> {
                             ),
                           ),
                           onChanged: (text) {
-                            // if (otpCount < 4 ) {
-                            //   otpCount +=1;
-                            // } else if (text == '') {
-                            //   otpCount -=1;
-                            // }
-                            //
-                            // print(otpCount);
                             setState(() {
                             });
+
+                            if (widget.enterSetConfirmPIN == 2) {
+                              if (textController.text.length > 3) {
+                                Get.back();
+                                Get.to(PINScreen(
+                                  title: 'Confirm your PIN',
+                                  desc:
+                                  "Prevent unauthorised access.",
+                                  isForgotPINShow: false,
+                                  enterSetConfirmPIN: 0,
+                                ));
+                              }
+                            }
                           },
                         ),
                       ),
@@ -265,6 +258,7 @@ class _OTPScreenState extends State<OTPScreen> {
               SizedBox(
                 height: 10,
               ),
+              if (widget.isForgotPINShow)
               TextButton(
                 child: Text('Forgot PIN ?',
                   style: TextStylesProductSans.textStyles_16.apply(
@@ -272,7 +266,13 @@ class _OTPScreenState extends State<OTPScreen> {
                   ),
                 ),
                 onPressed: () {
-
+                  Get.to(PINScreen(
+                    title: 'Enter your PIN',
+                    desc:
+                    "Enter the secure PIN to access your account",
+                    isForgotPINShow: false,
+                    enterSetConfirmPIN: 0,
+                  ));
                 },
               ),
             ],

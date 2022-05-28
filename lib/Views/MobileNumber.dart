@@ -6,12 +6,12 @@ import 'package:inr_d/Components/TextFieldCustom.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';
 import 'package:inr_d/Styles/TextStyles.dart';
 import 'package:get/get.dart';
-import '../Views/OTPScreen.dart';
+import '../Views/PINScreen.dart';
 import '../Styles/TextStyles.dart';
 import '../Styles/ColorStyle.dart';
 import 'package:country_picker/country_picker.dart';
 import '../Controllers/MobileNumberController.dart';
-
+import '../Views/VerificationCode.dart';
 
 class MobileNumber extends StatelessWidget {
   MobileNumber({Key? key}) : super(key: key);
@@ -152,7 +152,7 @@ class MobileNumber extends StatelessWidget {
                         .apply(color: Colors.white),
                     width: MediaQuery.of(context).size.width,
                     onTap: () {
-                      Get.to(OTPScreen());
+                      Get.to(VerificationCode());
                     },
                   ),
                 ],
