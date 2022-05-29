@@ -32,6 +32,12 @@ class ImageStyle {
   static const String Group46 = baseImage + "Group46.png";
   static const String Layer212Image = baseImage + "Layer212Image.png";
 
+  static const String tHome = baseImage + "tHome.png";
+  static const String tSettings = baseImage + "tSettings.png";
+  static const String tWallet = baseImage + "tWallet.png";
+  static const String tWithdraw = baseImage + "tWithdraw.png";
+  static const String tDeposit = baseImage + "tDeposit.png";
+
 
 
 }

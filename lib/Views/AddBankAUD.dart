@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:inr_d/Styles/ImageStyle.dart';
 import '../Components/AddBankAUDBox.dart';
 import '../Components/AppBarStyle.dart';
@@ -16,8 +17,32 @@ class AddBankAUD extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarStyle(
+        overlayStyle: SystemUiOverlayStyle.dark,
         title: 'Add Bank',
-        onTapTrailing: () {},
+        trailings: [
+          Container(
+            height: 36,
+            width: 36,
+            padding: EdgeInsets.zero,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1,
+                )),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              iconSize: 20,
+              icon: Icon(
+                Icons.question_mark_rounded,
+                color: Colors.grey,
+              ),
+              onPressed: () {
+
+              },
+            ),
+          ),
+        ],
       ),
       body:SingleChildScrollView(
         child: Container(

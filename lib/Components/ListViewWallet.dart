@@ -12,72 +12,69 @@ class ListViewWallet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 10),
-      width: double.infinity,
-      height: 500,
-      child:  ListView.separated(
-        itemCount: 7,
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 10,
-          );
-        },
-        itemBuilder: (context, index) {
-          return Container(
-            padding: EdgeInsets.only(left: 16,right: 19),
-            width: double.infinity,
-            height: 102,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child:Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                              controller.images[index],
-                              height: 35
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                              controller.chooseUSD[index],
-                              style: TextStylesProductSans.textStyles_14),
-                        ],
-                      ),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_up,
-                      color: ColorStyle.grey,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height:14,
-                ),
-                Text("Available : 0",
-                    style: TextStylesProductSans.textStyles_14
-                        .apply(color: ColorStyle.grey)),
-              ],
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(
-                    color: ColorStyle.grey
-                )
-            ),
-          );
-        },
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: 7,
+      physics: BouncingScrollPhysics(),
+      padding: EdgeInsets.only(
+        bottom: 16
       ),
-      // border: Border.all(
-      //     color: ColorStyle.grey
-      // )
+      separatorBuilder: (context, index) {
+        return SizedBox(
+          height: 10,
+        );
+      },
+      itemBuilder: (context, index) {
+        return Container(
+          padding: EdgeInsets.only(left: 16,right: 19),
+          width: double.infinity,
+          height: 102,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                            controller.images[index],
+                            height: 35
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                            controller.chooseUSD[index],
+                            style: TextStylesProductSans.textStyles_14),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    Icons.keyboard_arrow_up,
+                    color: ColorStyle.grey,
+                  )
+                ],
+              ),
+              SizedBox(
+                height:14,
+              ),
+              Text("Available : 0",
+                  style: TextStylesProductSans.textStyles_14
+                      .apply(color: ColorStyle.grey)),
+            ],
+          ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(
+                  color: ColorStyle.grey
+              )
+          ),
+        );
+      },
     );
   }
 }

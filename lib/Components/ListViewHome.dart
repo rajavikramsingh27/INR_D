@@ -17,6 +17,7 @@ class ListViewHome extends StatelessWidget {
       height: 420,
       child: ListView.separated(
         itemCount: 6,
+        physics: NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) {
           return SizedBox(
             height: 10,

@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:inr_d/Views/AddBankAUD.dart';
-import 'package:inr_d/Views/AddCurrency.dart';
-import 'package:inr_d/Views/DepositMoney.dart';
-import 'package:inr_d/Views/Home.dart';
-import 'package:inr_d/Views/ManualDepositAUD.dart';
-import 'package:inr_d/Views/OrderPreview.dart';
-import 'package:inr_d/Views/Wallet.dart';
+import 'package:inr_d/Views/TabbarScreen.dart';
 import './Views/SplashScreen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -40,8 +34,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-        home: AddBankAUD()
-        // home: ManualDepositAUD()
+        home: SplashScreen()
+        // home: TabbarScreen()
     );
   }
 }
