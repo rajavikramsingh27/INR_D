@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inr_d/Styles/ImageStyle.dart';
+import '../Components/AddBankAUDBox.dart';
 import '../Components/AppBarStyle.dart';
 import '../Components/DropdownButtonCustom.dart';
 import '../Components/TextButtonCustom.dart';
@@ -101,7 +102,6 @@ class AddBankAUD extends StatelessWidget {
               SizedBox(
                 height: 26,
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -179,21 +179,8 @@ class AddBankAUD extends StatelessWidget {
               SizedBox(
                 height: 22,
               ),
-              Container(
-                height: 140,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(
-                        color: ColorStyle.grey
-                    )
-                ),
-              ),
-              SizedBox(
-                height: 17,
-              ),
-              Text("Content will be edit by admin",
-                  style: TextStylesProductSans.textStyles_14
-                      .apply(color: ColorStyle.primaryColor)),
+              AddBankAUDBox(),
+
               SizedBox(height: 20,),
             ],
           ),
