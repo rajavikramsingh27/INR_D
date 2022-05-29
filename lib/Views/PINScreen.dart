@@ -6,7 +6,7 @@ import 'package:inr_d/Styles/ColorStyle.dart';
 import 'package:inr_d/Styles/TextStyles.dart';
 import 'package:get/get.dart';
 import '../Components/AppBarStyle.dart';
-import '../Views/PINScreen.dart';
+import 'package:get_storage/get_storage.dart';
 
 
 class PINScreen extends StatefulWidget {
@@ -72,7 +72,13 @@ class _PINScreenState extends State<PINScreen> {
               SizedBox(
                 height: 120,
               ),
-              InkWell(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    elevation: 0,
+                    padding: EdgeInsets.all(0)
+                ),
                 child: Container(
                   width: 100,
                   child: Row(
@@ -130,8 +136,21 @@ class _PINScreenState extends State<PINScreen> {
                                   desc:
                                   "Prevent unauthorised access.",
                                   isForgotPINShow: false,
-                                  enterSetConfirmPIN: 0,
+                                  enterSetConfirmPIN: 1,
                                 ));
+                              }
+                            } else if (widget.enterSetConfirmPIN == 1) {
+                              if (textController.text.length > 3) {
+                                GetStorage().write('isLogin', true);
+
+                                // Get.back();
+                                // Get.to(PINScreen(
+                                //   title: 'Enter your PIN',
+                                //   desc:
+                                //   "Enter the secure PIN to access your account",
+                                //   isForgotPINShow: true,
+                                //   enterSetConfirmPIN: 0,
+                                // ));
                               }
                             }
                           },
@@ -251,7 +270,7 @@ class _PINScreenState extends State<PINScreen> {
                     ],
                   ),
                 ),
-                onTap: () {
+                onPressed: () {
                   focusNode.requestFocus();
                 },
               ),
@@ -266,12 +285,13 @@ class _PINScreenState extends State<PINScreen> {
                   ),
                 ),
                 onPressed: () {
+                  Get.back();
                   Get.to(PINScreen(
-                    title: 'Enter your PIN',
+                    title: 'Please set a PIN',
                     desc:
-                    "Enter the secure PIN to access your account",
+                    "Prevent unauthorised access.",
                     isForgotPINShow: false,
-                    enterSetConfirmPIN: 0,
+                    enterSetConfirmPIN: 2,
                   ));
                 },
               ),

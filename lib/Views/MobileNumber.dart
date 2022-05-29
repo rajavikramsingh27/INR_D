@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:inr_d/Components/TextButtonCustom.dart';
 import 'package:inr_d/Components/TextFieldCustom.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';
@@ -122,6 +123,7 @@ class MobileNumber extends StatelessWidget {
                             hintText: 'Enter mobile number',
                             textStyle: TextStylesProductSans.textStyles_15
                                 .apply(color: Colors.black),
+                            keyboardType: TextInputType.number,
                             prefix: Container(
                               padding: EdgeInsets.only(right: 6, left: 6),
                               margin: EdgeInsets.only(top: 16, bottom: 16, right: 6, left: 6),
@@ -152,7 +154,18 @@ class MobileNumber extends StatelessWidget {
                         .apply(color: Colors.white),
                     width: MediaQuery.of(context).size.width,
                     onTap: () {
-                      Get.to(VerificationCode());
+                      final isLogin = GetStorage().read('isLogin') ?? false;
+                      if (isLogin) {
+                        Get.to(PINScreen(
+                          title: 'Enter your PIN',
+                          desc:
+                          "Enter the secure PIN to access your account",
+                          isForgotPINShow: true,
+                          enterSetConfirmPIN: 0,
+                        ));
+                      } else {
+                        Get.to(VerificationCode());
+                      }
                     },
                   ),
                 ],

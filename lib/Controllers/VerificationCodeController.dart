@@ -15,7 +15,10 @@ class VerificationCodeController extends GetxController {
   FocusNode focusFourth = FocusNode();
 
   reset() {
-
+    txtOTP_First.value.text = '';
+    txtOTP_Second.value.text = '';
+    txtOTP_Third.value.text = '';
+    txtOTP_Fourth.value.text = '';
   }
 
 }
