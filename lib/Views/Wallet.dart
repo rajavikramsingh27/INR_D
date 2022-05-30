@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:inr_d/Controllers/WalletController.dart';
 import '../Components/AppBarStyle.dart';
+import '../Components/DropdownButtonCustom.dart';
 import '../Components/TextButtonCustom.dart';
+import '../Components/TextFieldCustomOutline.dart';
 import '../Styles/ColorStyle.dart';
+import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Views/AddBank.dart';
 import '../Views/ManualDeposit.dart';
@@ -142,10 +145,35 @@ class Wallet extends StatelessWidget {
                             onTap: () {
                               final isAutoDeposit = GetStorage().read('isAutoDeposit') ?? true;
 
+                              List<Widget> arrBankDetails = [];
+
+                              if (index == 0) {
+                                arrBankDetails = controller.arrAUDBankDetails;
+                              } else if (index == 1) {
+                                arrBankDetails = controller.arrUSDBankDetails;
+                              } else if (index == 2) {
+                                arrBankDetails = controller.arrCADBankDetails;
+                              } else if (index == 3) {
+                                arrBankDetails = controller.arrINRBankDetails;
+                              } else if (index == 4) {
+                                arrBankDetails = controller.arrGBPBankDetails;
+                              } else if (index == 5) {
+                                arrBankDetails = controller.arrEUROBankDetails;
+                              } else if (index == 6) {
+                                arrBankDetails = controller.arrSGDBankDetails;
+                              } else if (index == 7) {
+                                arrBankDetails = controller.arrNZDBankDetails;
+                              }
                               if (isAutoDeposit) {
-                                Get.to(AddBank(title: controller.chooseUSD[index],));
+                                Get.to(AddBank(
+                                  title: controller.chooseUSD[index],
+                                  arrBankFormDetails: arrBankDetails,
+                                ));
                               } else {
-                                Get.to(ManualDeposit(title: controller.chooseUSD[index],));
+                                Get.to(ManualDeposit(
+                                  title: controller.chooseUSD[index],
+                                  arrBankDetails: controller.arrManualDeposit[index],
+                                ));
                               }
                             },
                           ),

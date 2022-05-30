@@ -9,14 +9,18 @@ class ImageStyle {
   static const String logoWhiteBG = baseImage + "logoWhiteBG.png";
   static const String verificationCode = baseImage + "verificationCode.png";
   static const String cloudComputing = baseImage + "cloudComputing.png";
-  static const String Group8 = baseImage + "Group8.png";
-  static const String Group30 = baseImage + "Group30.png";
-  static const String Group31 = baseImage + "Group31.png";
-  static const String Group32 = baseImage + "Group32.png";
-  static const String Group33 = baseImage + "Group33.png";
-  static const String Group34 = baseImage + "Group34.png";
-  static const String Group35 = baseImage + "Group35.png";
-  static const String Group36 = baseImage + "Group36.png";
+
+  static const String aud = baseImage + "aud.png";
+  static const String usd = baseImage + "usd.png";
+  static const String cad = baseImage + "cad.png";
+  static const String inr = baseImage + "inr.png";
+
+  static const String gbp = baseImage + "gbp.png";
+  static const String euro = baseImage + "euro.png";
+  static const String sgd = baseImage + "sgd.png";
+  static const String nzd = baseImage + "nzd.png";
+
+
   static const String LayerImage = baseImage + "LayerImage.png";
   static const String Layer204Image = baseImage + "Layer204Image.png";
   static const String LayercopyImage = baseImage + "LayercopyImage.png";
