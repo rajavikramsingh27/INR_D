@@ -15,7 +15,10 @@ import 'ManualDeposit.dart';
 
 
 class DepositMoney extends StatelessWidget {
-  DepositMoney({Key? key}) : super(key: key);
+  final String titleManualDeposit;
+  final int indexManualDeposit;
+
+  DepositMoney({Key? key, required this.titleManualDeposit, required this.indexManualDeposit}) : super(key: key);
 
   final controller = Get.put(DepositMoneyController());
 
@@ -84,11 +87,9 @@ class DepositMoney extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                // GetStorage().write('isAutoDeposit', false);
-
                   Get.to(ManualDeposit(
-                    title: controller.titleManualDeposit.value,
-                    arrBankDetails: controller.arrManualDeposit[controller.index.value],
+                    title: titleManualDeposit,
+                    arrBankDetails: controller.arrManualDeposit[indexManualDeposit],
                   ));
 
               },

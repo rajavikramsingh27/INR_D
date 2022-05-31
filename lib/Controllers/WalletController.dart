@@ -38,7 +38,6 @@ List<List<String>> arrManualDeposit = [
     'Account No.',
     'BSB No.',
     'Bank Name.',
-    'pay ID',
   ],
   //USD
   [
@@ -53,7 +52,6 @@ List<List<String>> arrManualDeposit = [
     'Account No.',
     'Transit No.',
     'Bank Name.',
-    'Interac ID',
   ],
 // INR
   [
@@ -61,7 +59,6 @@ List<List<String>> arrManualDeposit = [
     'Account No.',
     'IFSC Code.',
     'Bank Name.',
-    'UPI ID',
   ],
 // GBP
   [
