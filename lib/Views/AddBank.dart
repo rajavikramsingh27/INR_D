@@ -339,6 +339,9 @@ class AddBank extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     if (controller.arrBankDetails.length != 0)
                       Text(
                         'Processing',
