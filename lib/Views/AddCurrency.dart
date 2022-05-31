@@ -43,7 +43,7 @@ class AddCurrency extends StatelessWidget {
                   fontWeightDelta: 1,
                 ),
                 iconWidget: Icon(Icons.keyboard_arrow_down, color: ColorStyle.grey, size: 26,),
-                listValue: ['Select', 'USD', 'CAD', 'INR', 'GBP', 'EURO', 'SGD', 'NZD'
+                listValue: ['Select', 'AUD', 'USD', 'CAD', 'INR', 'GBP', 'EURO', 'SGD', 'NZD'
                 ],
                 selectedValue: "Select",
                 onChanged: (text) {
@@ -86,9 +86,6 @@ class AddCurrency extends StatelessWidget {
               ),
               SizedBox(
                 height: 30,
-              ),
-              SizedBox(
-                height: 16,
               ),
               TextButtonCustom(
                 text: "DEPOSIT",
