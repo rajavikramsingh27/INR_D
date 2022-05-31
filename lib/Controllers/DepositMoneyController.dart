@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 class DepositMoneyController extends GetxController {
 
-  RxInt index = 0.obs;
-  RxString titleManualDeposit = ''.obs;
+  // RxInt indexManualDeposit = 0.obs;
+  // RxString titleManualDeposit = ''.obs;
 
   List<List<String>> arrManualDeposit = [
     // AUD

@@ -1,4 +1,4 @@
-import 'package:country_picker/country_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,11 +12,18 @@ import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Views/DepositMoney.dart';
 import '../Controllers/DepositMoneyController.dart';
+import '../Utils/Global.dart';
+
 
 class AddCurrency extends StatelessWidget {
   AddCurrency({Key? key}) : super(key: key);
 
   final controllerDepositMoney = Get.put(DepositMoneyController());
+
+  String titleManualDeposit = '';
+  int indexManualDeposit = 0;
+  final arrDropDown = ['Select', 'AUD', 'USD', 'CAD', 'INR', 'GBP', 'EURO', 'SGD', 'NZD'];
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +50,11 @@ class AddCurrency extends StatelessWidget {
                   fontWeightDelta: 1,
                 ),
                 iconWidget: Icon(Icons.keyboard_arrow_down, color: ColorStyle.grey, size: 26,),
-                listValue: ['Select', 'AUD', 'USD', 'CAD', 'INR', 'GBP', 'EURO', 'SGD', 'NZD'
-                ],
-                selectedValue: "Select",
+                listValue: arrDropDown,
+                selectedValue: 'Select',
                 onChanged: (text) {
-                  controllerDepositMoney.titleManualDeposit.value = text!;
+                  titleManualDeposit = text!;
+                  indexManualDeposit = arrDropDown.indexOf(text)-1;
                 },
               ),
               SizedBox(
@@ -94,7 +101,14 @@ class AddCurrency extends StatelessWidget {
                     .apply(color: Colors.white),
                 width: MediaQuery.of(context).size.width,
                 onTap: () {
-                  Get.to(DepositMoney());
+                  if (titleManualDeposit.isEmpty) {
+                    'Select Country'.showError();
+                    return;
+                  }
+                  Get.to(DepositMoney(
+                    titleManualDeposit: titleManualDeposit,
+                    indexManualDeposit: indexManualDeposit,
+                  ));
                 },
               ),
               SizedBox(
@@ -112,12 +126,6 @@ class AddCurrency extends StatelessWidget {
                 colorBoder: Colors.black12,
                 radiusBorder: 6,
               ),
-              // SizedBox(
-              //   height: 18,
-              // ),
-              // Text("Content will be edit by admin",
-              //     style: TextStylesProductSans.textStyles_14
-              //         .apply(color: ColorStyle.primaryColor)),
             ],
           ),
         ),

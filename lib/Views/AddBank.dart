@@ -161,6 +161,7 @@ class AddBank extends StatelessWidget {
                       itemCount: controller.arrTextEditController.length,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
                       separatorBuilder: (context, index) {
                         return SizedBox(
                           height: 16,
@@ -320,10 +321,7 @@ class AddBank extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: controller.arrBankDetails.length,
-                        padding: EdgeInsets.only(
-                          // top: 16,
-                          // bottom: 16,
-                        ),
+                        padding: EdgeInsets.zero,
                         separatorBuilder: (Get, index) {
                           return SizedBox(
                             height: 6,
@@ -339,12 +337,6 @@ class AddBank extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
                     if (controller.arrBankDetails.length != 0)
                       Text(
                         'Processing',

@@ -68,13 +68,14 @@ class ManualDeposit extends StatelessWidget {
         initState: (state) {},
         builder: (auth) {
           return Obx(() => SingleChildScrollView(
-              padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+              padding: EdgeInsets.only(left: 16, right: 16,),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListView.separated(
                     itemCount: arrBankDetails!.length,
+                    padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     separatorBuilder: (context, index) {
@@ -201,12 +202,6 @@ class ManualDeposit extends StatelessWidget {
                     colorBoder: Colors.black12,
                     radiusBorder: 6,
                   ),
-                  // SizedBox(
-                  //   height: 16,
-                  // ),
-                  // Text("Content will be edit by admin",
-                  //     style: TextStylesProductSans.textStyles_14
-                  //         .apply(color: ColorStyle.primaryColor)),
                 ],
               )));
         },
