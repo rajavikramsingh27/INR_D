@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';
-import 'package:inr_d/Styles/TextStyles.dart';
+import '../Styles/TextStyles.dart';
 import '../Styles/ImageStyle.dart';
-import 'package:get/get.dart';
 import '../Views/MobileNumber.dart';
+import '../Views/VerificationCode.dart';
+import 'PINScreen.dart';
 
 
 // SvgPicture.asset(
@@ -28,7 +31,18 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(Duration(seconds: 3), () {
-      Get.to(MobileNumber());
+      final isLogedIn = GetStorage().read('isLogin') ?? false;
+      if (isLogedIn) {
+        Get.to(PINScreen(
+          title: 'Enter your PIN',
+          desc:
+          "Enter the secure PIN to access your account",
+          isForgotPINShow: true,
+          enterSetConfirmPIN: 0,
+        ));
+      } else {
+        Get.to(MobileNumber());
+      }
     });
   }
 

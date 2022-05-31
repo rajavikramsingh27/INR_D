@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/utils.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:inr_d/Components/TextButtonCustom.dart';
 import 'package:inr_d/Components/TextFieldCustom.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';

@@ -46,7 +46,7 @@ class _PINScreenState extends State<PINScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarStyle(
-        leading: BackButton(
+        leading: GetStorage().read('isLogin') ?? false ? SizedBox() : BackButton(
           color: Colors.grey,
         ),
         overlayStyle: SystemUiOverlayStyle.dark,
@@ -149,6 +149,13 @@ class _PINScreenState extends State<PINScreen> {
                                 Get.back();
                                 Get.offAll(TabbarScreen());
                               }
+                            } else if (widget.enterSetConfirmPIN == 1) {
+                              if (textController.text.length > 3) {
+                                GetStorage().write('isLogin', true);
+
+                                Get.back();
+                                Get.offAll(TabbarScreen());
+                              }
                             } else if (widget.enterSetConfirmPIN == 2) {
                               if (textController.text.length > 3) {
                                 Get.back();
@@ -158,19 +165,6 @@ class _PINScreenState extends State<PINScreen> {
                                   isForgotPINShow: false,
                                   enterSetConfirmPIN: 1,
                                 ));
-                              }
-                            } else if (widget.enterSetConfirmPIN == 1) {
-                              if (textController.text.length > 3) {
-                                GetStorage().write('isLogin', true);
-
-                                // Get.back();
-                                // Get.to(PINScreen(
-                                //   title: 'Enter your PIN',
-                                //   desc:
-                                //   "Enter the secure PIN to access your account",
-                                //   isForgotPINShow: true,
-                                //   enterSetConfirmPIN: 0,
-                                // ));
                               }
                             }
                           },

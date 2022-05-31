@@ -99,12 +99,12 @@ class ManualDeposit extends StatelessWidget {
               colorBoder: Colors.black12,
               radiusBorder: 6,
             ),
-            SizedBox(
-              height: 16,
-            ),
-            Text("Content will be edit by admin",
-                style: TextStylesProductSans.textStyles_14
-                    .apply(color: ColorStyle.primaryColor)),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // Text("Content will be edit by admin",
+            //     style: TextStylesProductSans.textStyles_14
+            //         .apply(color: ColorStyle.primaryColor)),
           ],
         )
       ),
