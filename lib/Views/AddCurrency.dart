@@ -11,10 +11,12 @@ import '../Styles/ColorStyle.dart';
 import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Views/DepositMoney.dart';
-
+import '../Controllers/DepositMoneyController.dart';
 
 class AddCurrency extends StatelessWidget {
-  const AddCurrency({Key? key}) : super(key: key);
+  AddCurrency({Key? key}) : super(key: key);
+
+  final controllerDepositMoney = Get.put(DepositMoneyController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +43,12 @@ class AddCurrency extends StatelessWidget {
                   fontWeightDelta: 1,
                 ),
                 iconWidget: Icon(Icons.keyboard_arrow_down, color: ColorStyle.grey, size: 26,),
-                listValue: ['Select', 'Bitcoin', 'India','USA'],
+                listValue: ['Select', 'USD', 'CAD', 'INR', 'GBP', 'EURO', 'SGD', 'NZD'
+                ],
                 selectedValue: "Select",
-                onChanged: (text) {},
+                onChanged: (text) {
+                  controllerDepositMoney.titleManualDeposit.value = text!;
+                },
               ),
               SizedBox(
                 height: 30,
@@ -71,10 +76,10 @@ class AddCurrency extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Min.",
+                  Text("Min. 10",
                       style: TextStylesProductSans.textStyles_14
                           .apply(color: Colors.grey)),
-                  Text("Max.",
+                  Text("Max. 1000",
                       style: TextStylesProductSans.textStyles_14
                           .apply(color: Colors.grey)),
                 ],
@@ -92,7 +97,7 @@ class AddCurrency extends StatelessWidget {
                     .apply(color: Colors.white),
                 width: MediaQuery.of(context).size.width,
                 onTap: () {
-                  Get.to(DeposiMoney());
+                  Get.to(DepositMoney());
                 },
               ),
               SizedBox(
@@ -110,12 +115,12 @@ class AddCurrency extends StatelessWidget {
                 colorBoder: Colors.black12,
                 radiusBorder: 6,
               ),
-              SizedBox(
-                height: 18,
-              ),
-              Text("Content will be edit by admin",
-                  style: TextStylesProductSans.textStyles_14
-                      .apply(color: ColorStyle.primaryColor)),
+              // SizedBox(
+              //   height: 18,
+              // ),
+              // Text("Content will be edit by admin",
+              //     style: TextStylesProductSans.textStyles_14
+              //         .apply(color: ColorStyle.primaryColor)),
             ],
           ),
         ),

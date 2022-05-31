@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../Components/AppBarStyle.dart';
 import '../Components/DropdownButtonCustom.dart';
 import '../Components/TextButtonCustom.dart';
 import '../Components/TextFieldCustomOutline.dart';
+import '../Controllers/DepositMoneyController.dart';
 import '../Styles/ColorStyle.dart';
 import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
+import 'ManualDeposit.dart';
 
 
-class DeposiMoney extends StatelessWidget {
-  const DeposiMoney({Key? key}) : super(key: key);
+class DepositMoney extends StatelessWidget {
+  DepositMoney({Key? key}) : super(key: key);
+
+  final controller = Get.put(DepositMoneyController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +55,15 @@ class DeposiMoney extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                GetStorage().write('isAutoDeposit', true);
+                // GetStorage().write('isAutoDeposit', true);
               },
             ),
-            SizedBox(
-              height: 16,
-            ),
-            Text("Content will be edit by admin",
-                style: TextStylesProductSans.textStyles_14
-                    .apply(color: ColorStyle.primaryColor)),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // Text("Content will be edit by admin",
+            //     style: TextStylesProductSans.textStyles_14
+            //         .apply(color: ColorStyle.primaryColor)),
             SizedBox(
               height: 50,
             ),
@@ -79,15 +84,21 @@ class DeposiMoney extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                GetStorage().write('isAutoDeposit', false);
+                // GetStorage().write('isAutoDeposit', false);
+
+                  Get.to(ManualDeposit(
+                    title: controller.titleManualDeposit.value,
+                    arrBankDetails: controller.arrManualDeposit[controller.index.value],
+                  ));
+
               },
             ),
-            SizedBox(
-              height: 16,
-            ),
-            Text("Content will be edit by admin",
-                style: TextStylesProductSans.textStyles_14
-                    .apply(color: ColorStyle.primaryColor)),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // Text("Content will be edit by admin",
+            //     style: TextStylesProductSans.textStyles_14
+            //         .apply(color: ColorStyle.primaryColor)),
           ],
         ),
       ),

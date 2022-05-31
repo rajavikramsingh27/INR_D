@@ -154,18 +154,20 @@ class MobileNumber extends StatelessWidget {
                         .apply(color: Colors.white),
                     width: MediaQuery.of(context).size.width,
                     onTap: () {
-                      final isLogin = GetStorage().read('isLogin') ?? false;
-                      if (isLogin) {
-                        Get.to(PINScreen(
-                          title: 'Enter your PIN',
-                          desc:
-                          "Enter the secure PIN to access your account",
-                          isForgotPINShow: true,
-                          enterSetConfirmPIN: 0,
-                        ));
-                      } else {
-                        Get.to(VerificationCode());
-                      }
+                      Get.to(VerificationCode());
+
+                      // final isLogin = GetStorage().read('isLogin') ?? false;
+                      // if (isLogin) {
+                      //   Get.to(PINScreen(
+                      //     title: 'Enter your PIN',
+                      //     desc:
+                      //     "Enter the secure PIN to access your account",
+                      //     isForgotPINShow: true,
+                      //     enterSetConfirmPIN: 0,
+                      //   ));
+                      // } else {
+                      //   Get.to(VerificationCode());
+                      // }
                     },
                   ),
                 ],

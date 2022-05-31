@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../Styles/ImageStyle.dart';
 import '../Styles/TextStyles.dart';
 
 class AppBarStyle extends StatelessWidget implements PreferredSizeWidget {
