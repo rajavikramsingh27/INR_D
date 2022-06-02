@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import '../Components/AppBarStyle.dart';
 import '../Styles/ImageStyle.dart';
 import '../Controllers/VerificationCodeController.dart';
-import '../Views/PINScreen.dart';
+
 
 class VerificationCode extends StatelessWidget {
   final controller = Get.put(VerificationCodeController());
@@ -63,8 +63,6 @@ class VerificationCode extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(left: 40, right: 40),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
                     height: 100,
@@ -140,13 +138,7 @@ class VerificationCode extends StatelessWidget {
                             focusNode: controller.focusFourth,
                             onChanged: (text) {
                               if (controller.txtOTP_Fourth.value.text.length > 0)
-                                Get.to(PINScreen(
-                                  title: 'Please set a PIN',
-                                  desc:
-                                  "Prevent unauthorised access.",
-                                  isForgotPINShow: false,
-                                  enterSetConfirmPIN: 2,
-                                ));
+                                controller.sendVerifyCode();
                               else if (controller.txtOTP_Fourth.value.text == '')
                                 controller.focusThird.requestFocus();
                             },
