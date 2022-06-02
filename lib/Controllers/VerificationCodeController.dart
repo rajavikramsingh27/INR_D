@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../Utils/API.dart';
 import '../Views/PINScreen.dart';
+import 'package:get_storage/get_storage.dart';
+import '../Utils/Constants.dart';
 
 
 class VerificationCodeController extends GetxController {
@@ -67,6 +69,15 @@ class VerificationCodeController extends GetxController {
   void sendVerifyCode() async {
     timerStop();
 
+    // Get.to(PINScreen(
+    //   title: 'Please set a PIN',
+    //   desc:
+    //   "Prevent unauthorised access.",
+    //   isForgotPINShow: false,
+    //   enterSetConfirmPIN: 2,
+    // ));
+    // return;
+
     final otpValues = txtOTP_First.value.text+txtOTP_Second.value.text+txtOTP_Third.value.text+txtOTP_Fourth.value.text;
 
     Get.focusScope!.unfocus();
@@ -78,10 +89,10 @@ class VerificationCodeController extends GetxController {
           'code': otpValues
         });
 
-    print(response);
-    print(response!['status']);
+    if (response!['status'] != null && response['status']) {
+      phoneNumber.value = phoneNumber.value.replaceAll('+', '');
+      GetStorage().write(Constants.instance.kMobileNumber, phoneNumber.value);
 
-    if (response['status']) {
       Get.to(PINScreen(
         title: 'Please set a PIN',
         desc:

@@ -38,6 +38,33 @@ class API {
     }
   }
 
+  Future<Map<String, dynamic>?> get({required String endPoint}) async {
+    if (!await _checkInternet()) {
+      return null;
+    }
+
+    debugPrint('${_kBaseURL}${endPoint}');
+
+    final url = Uri.parse('${_kBaseURL}${endPoint}');
+    try {
+      showLoaderGetX();
+      final response = await http.get(url);
+      hideLoader();
+      debugPrint('Response status: ${response.statusCode}');
+
+      final Map parsed = json.decode(response.body);
+      return parsed as Map<String, dynamic>;
+    } on Exception catch (exception) {
+      hideLoader();
+      debugPrint('Exception is:-'+exception.toString());
+      return null;
+    } catch (error) {
+      hideLoader();
+      debugPrint('Error is:-'+error.toString());
+      return null;
+    }
+  }
+
   Future<Map<String, dynamic>?> post({required String endPoint, required Map<String, String> params}) async {
     if (!await _checkInternet()) {
       return null;
@@ -66,12 +93,18 @@ class API {
     }
   }
 
+
+
 }
 
 class APIEndPoints {
   APIEndPoints._privateConstructor();
   static final APIEndPoints instance = APIEndPoints._privateConstructor();
 
-  String kTwilioSendCode = 'twilio/sendCode';
-  String kTwilioVerifyCode = 'twilio/verifyCode';
+  final kTwilioSendCode = 'twilio/sendCode';
+  final kTwilioVerifyCode = 'twilio/verifyCode';
+  final kSetPIN = 'users/setmpin';
+
+  final kGetUser = 'users/getUser';
+  final kLogin = 'users/login';
 }

@@ -1,4 +1,4 @@
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
@@ -11,6 +11,8 @@ import '../Components/AppBarStyle.dart';
 import 'package:get_storage/get_storage.dart';
 import '../Views/TabbarScreen.dart';
 import '../Utils/Global.dart';
+import '../Utils/Constants.dart';
+
 
 class PINScreen extends StatefulWidget {
   String? title;
@@ -19,7 +21,8 @@ class PINScreen extends StatefulWidget {
   final int enterSetConfirmPIN;
   final bool isForgotPINShow;
 
-  PINScreen({Key? key,
+  PINScreen({
+    Key? key,
     required this.title,
     required this.desc,
     required this.isForgotPINShow,
@@ -35,57 +38,56 @@ class _PINScreenState extends State<PINScreen> {
 
   FocusNode focusNode = FocusNode();
   TextEditingController textController = TextEditingController();
-  
+
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(milliseconds: 100), () {
       focusNode.requestFocus();
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      init: PINScreenController(),
-      initState: (state) {
-
-      },
-      builder: (auth) {
-        return Obx(()=>Scaffold(
-          appBar: AppBarStyle(
-            leading: GetStorage().read('isLogin') ?? false ? SizedBox() : BackButton(
-              color: Colors.grey,
-            ),
-            overlayStyle: SystemUiOverlayStyle.dark,
-            title: '',
-            trailings: [
-              Container(
-                height: 36,
-                width: 36,
-                padding: EdgeInsets.zero,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    )),
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  iconSize: 20,
-                  icon: Icon(
-                    Icons.question_mark_rounded,
-                    color: Colors.grey,
-                  ),
-                  onPressed: () {
-
-                  },
-                ),
+    return Scaffold(
+      appBar: AppBarStyle(
+        leading: GetStorage().read(Constants.instance.kMobileNumber).toString().isEmpty
+            ? SizedBox()
+            : BackButton(
+          color: Colors.grey,
+        ),
+        overlayStyle: SystemUiOverlayStyle.dark,
+        title: '',
+        trailings: [
+          Container(
+            height: 36,
+            width: 36,
+            padding: EdgeInsets.zero,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1,
+                )),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              iconSize: 20,
+              icon: Icon(
+                Icons.question_mark_rounded,
+                color: Colors.grey,
               ),
-            ],
+              onPressed: () {},
+            ),
           ),
-          body: SingleChildScrollView(
+        ],
+      ),
+
+      body: GetBuilder(
+        init: PINScreenController(),
+        initState: (state) {},
+        builder: (auth) {
+          return SingleChildScrollView(
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height -
@@ -95,8 +97,8 @@ class _PINScreenState extends State<PINScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(controller.pinConfirmValue.value.toString()),
-                  Text(widget.title!, style: TextStylesProductSans.textStyles_26),
+                  Text(widget.title!,
+                      style: TextStylesProductSans.textStyles_26),
                   SizedBox(
                     height: 10,
                   ),
@@ -141,38 +143,48 @@ class _PINScreenState extends State<PINScreen> {
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                               ),
                               onChanged: (text) {
+
                                 if (widget.enterSetConfirmPIN == 0) {
                                   if (textController.text.length > 3) {
-                                    Get.back();
-                                    Get.offAll(TabbarScreen());
+                                    controller.mpin.value = textController.text;
+                                    controller.login();
+                                    // Get.back();
+                                    // Get.offAll(TabbarScreen());
                                   }
                                 } else if (widget.enterSetConfirmPIN == 1) {
                                   if (textController.text.length > 3) {
                                     controller.pinConfirmValue.value = textController.text;
 
-                                    if (controller.pinValue.value != controller.pinValue.value) {
-                                      'Confirm PIN is not same with you setted PIN'.showError();
+                                    if (controller.pinValue.value != controller.pinConfirmValue.value) {
+                                      'Confirm PIN is not same with you setted PIN'
+                                          .showError();
                                     } else {
-                                      GetStorage().write('isLogin', true);
 
-                                      Get.back();
-                                      Get.offAll(TabbarScreen());
+                                      controller.setPIN();
                                     }
                                   }
                                 } else if (widget.enterSetConfirmPIN == 2) {
                                   if (textController.text.length > 3) {
                                     controller.pinValue.value = textController.text;
+
+                                    debugPrint('pin pin pin pin pin ');
+                                    debugPrint(controller.pinValue.value);
+                                    debugPrint(controller.pinConfirmValue.value);
+
                                     Get.back();
                                     Get.to(PINScreen(
                                       title: 'Confirm your PIN',
@@ -182,6 +194,8 @@ class _PINScreenState extends State<PINScreen> {
                                     ));
                                   }
                                 }
+
+                                setState(() {});
                               },
                             ),
                           ),
@@ -204,15 +218,18 @@ class _PINScreenState extends State<PINScreen> {
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                               ),
                             ),
                           ),
@@ -235,15 +252,18 @@ class _PINScreenState extends State<PINScreen> {
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                               ),
                             ),
                           ),
@@ -266,15 +286,18 @@ class _PINScreenState extends State<PINScreen> {
                                 enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(30),
                                     borderSide: BorderSide(
-                                        width: 0, color: Colors.transparent)),
+                                        width: 0,
+                                        color: Colors.transparent)),
                               ),
                             ),
                           ),
@@ -308,11 +331,9 @@ class _PINScreenState extends State<PINScreen> {
                 ],
               ),
             ),
-          ),
-        ));
-      },
+          );
+        },
+      ),
     );
   }
 }
-
-

@@ -8,14 +8,9 @@ import '../Styles/ImageStyle.dart';
 import '../Views/MobileNumber.dart';
 import '../Views/VerificationCode.dart';
 import 'PINScreen.dart';
+import '../Utils/Constants.dart';
+import '../Controllers/SplashScreenController.dart';
 
-
-// SvgPicture.asset(
-// ImageStyle.inr_D,
-// fit: BoxFit.contain,
-// height: 100,
-// width: 100,
-// ),
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -25,24 +20,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final controller = Get.put(SplashScreenController());
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     Future.delayed(Duration(seconds: 3), () {
-      // final isLogedIn = GetStorage().read('isLogin') ?? false;
-      // if (isLogedIn) {
-      //   Get.to(PINScreen(
-      //     title: 'Enter your PIN',
-      //     desc:
-      //     "Enter the secure PIN to access your account",
-      //     isForgotPINShow: true,
-      //     enterSetConfirmPIN: 0,
-      //   ));
-      // } else {
+      final mobileNumber = GetStorage().read(Constants.instance.kMobileNumber) ?? '';
+      debugPrint(mobileNumber);
+
+      if (mobileNumber.toString().isNotEmpty) {
+        controller.getUser(
+          mobileNumber: mobileNumber
+        );
+      } else {
         Get.to(MobileNumber());
-      // }
+      }
     });
   }
 
