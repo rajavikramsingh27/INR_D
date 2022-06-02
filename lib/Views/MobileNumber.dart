@@ -159,7 +159,8 @@ class MobileNumber extends StatelessWidget {
                             .apply(color: Colors.white),
                         width: MediaQuery.of(context).size.width,
                         onTap: () async {
-                          controller.sendForOTP();
+                          final phoneNumber = '+${controller.phoneCode.value}${controller.controllerMobileNumber.value.text}';
+                          controller.sendForOTP(phoneNumber);
                         },
                       ),
                     ],

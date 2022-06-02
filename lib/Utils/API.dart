@@ -74,7 +74,4 @@ class APIEndPoints {
 
   String kTwilioSendCode = 'twilio/sendCode';
   String kTwilioVerifyCode = 'twilio/verifyCode';
-
-  // String kTwilioSendCode = 'twilio/sendCode';
-  // String kTwilioVerifyCode = 'twilio/verifyCode';
 }

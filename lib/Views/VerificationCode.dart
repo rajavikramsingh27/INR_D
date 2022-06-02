@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,10 +12,14 @@ import 'package:get/get.dart';
 import '../Components/AppBarStyle.dart';
 import '../Styles/ImageStyle.dart';
 import '../Controllers/VerificationCodeController.dart';
+import '../Controllers/MobileNumberController.dart';
+import '../Utils/API.dart';
 
 
 class VerificationCode extends StatelessWidget {
   final controller = Get.put(VerificationCodeController());
+  final controllerMobileNumber = Get.put(MobileNumberController());
+
 
   VerificationCode({Key? key}) : super(key: key);
 
@@ -25,6 +30,10 @@ class VerificationCode extends StatelessWidget {
         overlayStyle: SystemUiOverlayStyle.dark,
         leading: BackButton(
           color: Colors.grey,
+          onPressed: () {
+            Get.back();
+            controller.timerStop();
+          },
         ),
         title: 'Enter Verification Code',
         trailings: [
@@ -150,20 +159,48 @@ class VerificationCode extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                            text: "Didn't receive a OTP? ",
-                            style: TextStylesProductSans.textStyles_16
-                                .apply(color: Colors.grey)),
-                        TextSpan(
-                            text: 'Resend OTP',
-                            style: TextStylesProductSans.textStyles_16
-                                .apply(color: ColorStyle.primaryColor)),
-                      ],
+                  if (controller.isResendOTP.value)
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text: "Didn't receive a OTP? ",
+                              style: TextStylesProductSans.textStyles_16
+                                  .apply(color: Colors.grey)),
+                          TextSpan(
+                              text: 'Resend OTP',
+                              style: TextStylesProductSans.textStyles_16
+                                  .apply(color: ColorStyle.primaryColor),
+                              recognizer: TapGestureRecognizer()
+                            ..onTap = () async {
+                                controller.resendOTP();
+                            }
+                          ),
+                        ],
+                      ),
                     ),
-                  )
+                  if (!controller.isResendOTP.value)
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Resend OTP in ',
+                              style: TextStylesProductSans.textStyles_16
+                                  .apply(color: Colors.grey)),
+                          TextSpan(
+                              text: controller.isResendSecCount.value.toString(),
+                              style: TextStylesProductSans.textStyles_16
+                                  .apply(
+                                  color: ColorStyle.primaryColor,
+                                  fontWeightDelta: 2
+                              )),
+                          TextSpan(
+                              text: ' sec',
+                              style: TextStylesProductSans.textStyles_16
+                                  .apply(color: Colors.grey)),
+                        ],
+                      ),
+                    ),
                 ],
               ),
             ),
