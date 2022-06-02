@@ -11,8 +11,8 @@ import '../Utils/Constants.dart';
 class PINScreenController extends GetxController {
   RxString pinValue = ''.obs;
   RxString pinConfirmValue = ''.obs;
-
   RxString mpin = ''.obs;
+
   reset() {}
 
   setPIN() async {

@@ -11,10 +11,10 @@ class DropdownButtonCustom extends StatelessWidget {
   final Color? colorBorder;
   final EdgeInsets? padding;
   final double? radiusBorder;
-  // final double? height;
   final Widget? iconWidget;
   final Text? hint;
   final TextStyle? textStyle;
+  final Color? bgColor;
 
   const DropdownButtonCustom({
     Key? key,
@@ -22,9 +22,9 @@ class DropdownButtonCustom extends StatelessWidget {
     this.listValue,
     this.selectedValue,
     this.colorBorder = Colors.red,
+    this.bgColor = Colors.white,
     this.padding = EdgeInsets.zero,
-    this.radiusBorder = 4,
-    // this.height = 30,
+    this.radiusBorder = 40,
     this.iconWidget = const Icon(Icons.keyboard_arrow_down, color: Colors.black,),
     this.hint = const Text(""),
     this.textStyle = const TextStyle()
@@ -33,13 +33,20 @@ class DropdownButtonCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(radiusBorder!)
+      ),
       child: DropdownButtonFormField<String>(
         isExpanded: true,
         value: selectedValue,
         icon: iconWidget,
         iconSize: 30,
         hint: hint,
+        style: textStyle!.apply(
+          // color: Colors.white
+        ),
+        dropdownColor: ColorStyle.primaryColor,
         decoration: InputDecoration(
           contentPadding: padding,
           focusedBorder: OutlineInputBorder(
@@ -61,9 +68,6 @@ class DropdownButtonCustom extends StatelessWidget {
                   value,
                   maxLines: 1,
                   textAlign: TextAlign.left,
-                  style: textStyle!.apply(
-                      color: (selectedValue! == listValue![0]) ? ColorStyle.grey : ColorStyle.primaryColor
-                  )
               ),
             ))
             .toList(),

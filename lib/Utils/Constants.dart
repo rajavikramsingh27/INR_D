@@ -7,4 +7,6 @@ class Constants {
   final kStatus = 'status';
   final kSuccess = 'success';
   final kData = 'data';
+  final kMessage = 'message';
+  final kResult = 'result';
 }

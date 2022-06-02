@@ -18,8 +18,9 @@ class PINScreen extends StatefulWidget {
   String? title;
   String? desc;
 
-  final int enterSetConfirmPIN;
-  final bool isForgotPINShow;
+  int enterSetConfirmPIN;
+  bool isForgotPINShow;
+  bool isBack;
 
   PINScreen({
     Key? key,
@@ -27,6 +28,7 @@ class PINScreen extends StatefulWidget {
     required this.desc,
     required this.isForgotPINShow,
     required this.enterSetConfirmPIN,
+    this.isBack = true,
   }) : super(key: key);
 
   @override
@@ -45,6 +47,9 @@ class _PINScreenState extends State<PINScreen> {
 
     Future.delayed(Duration(milliseconds: 100), () {
       focusNode.requestFocus();
+
+      debugPrint('kMobileNumber kMobileNumber kMobileNumber kMobileNumber ');
+      print(GetStorage().read(Constants.instance.kMobileNumber).toString());
     });
   }
 
@@ -52,11 +57,11 @@ class _PINScreenState extends State<PINScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarStyle(
-        leading: GetStorage().read(Constants.instance.kMobileNumber).toString().isEmpty
-            ? SizedBox()
-            : BackButton(
+        leading: widget.isBack
+            ? BackButton(
           color: Colors.grey,
-        ),
+        )
+            : SizedBox(),
         overlayStyle: SystemUiOverlayStyle.dark,
         title: '',
         trailings: [
@@ -162,12 +167,14 @@ class _PINScreenState extends State<PINScreen> {
                                   if (textController.text.length > 3) {
                                     controller.mpin.value = textController.text;
                                     controller.login();
-                                    // Get.back();
-                                    // Get.offAll(TabbarScreen());
                                   }
                                 } else if (widget.enterSetConfirmPIN == 1) {
                                   if (textController.text.length > 3) {
                                     controller.pinConfirmValue.value = textController.text;
+
+                                    debugPrint('pin pin pin pin pin ');
+                                    debugPrint(controller.pinValue.value);
+                                    debugPrint(controller.pinConfirmValue.value);
 
                                     if (controller.pinValue.value != controller.pinConfirmValue.value) {
                                       'Confirm PIN is not same with you setted PIN'
@@ -185,13 +192,20 @@ class _PINScreenState extends State<PINScreen> {
                                     debugPrint(controller.pinValue.value);
                                     debugPrint(controller.pinConfirmValue.value);
 
-                                    Get.back();
-                                    Get.to(PINScreen(
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PINScreen(
                                       title: 'Confirm your PIN',
                                       desc: "Prevent unauthorised access.",
                                       isForgotPINShow: false,
                                       enterSetConfirmPIN: 1,
-                                    ));
+                                    )));
+
+                                    // Get.back();
+                                    // Get.to(PINScreen(
+                                    //   title: 'Confirm your PIN',
+                                    //   desc: "Prevent unauthorised access.",
+                                    //   isForgotPINShow: false,
+                                    //   enterSetConfirmPIN: 1,
+                                    // ));
                                   }
                                 }
 
@@ -319,13 +333,20 @@ class _PINScreenState extends State<PINScreen> {
                             .apply(color: ColorStyle.primaryColor),
                       ),
                       onPressed: () {
-                        Get.back();
-                        Get.to(PINScreen(
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => PINScreen(
                           title: 'Please set a PIN',
                           desc: "Prevent unauthorised access.",
                           isForgotPINShow: false,
                           enterSetConfirmPIN: 2,
-                        ));
+                        )));
+
+                        // Get.back();
+                        // Get.to(PINScreen(
+                        //   title: 'Please set a PIN',
+                        //   desc: "Prevent unauthorised access.",
+                        //   isForgotPINShow: false,
+                        //   enterSetConfirmPIN: 2,
+                        // ));
                       },
                     ),
                 ],

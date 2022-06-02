@@ -65,7 +65,7 @@ class API {
     }
   }
 
-  Future<Map<String, dynamic>?> post({required String endPoint, required Map<String, String> params}) async {
+  Future<Map<String, dynamic>?> post({required String endPoint, required Map<String, dynamic> params}) async {
     if (!await _checkInternet()) {
       return null;
     }
@@ -105,6 +105,8 @@ class APIEndPoints {
   final kTwilioVerifyCode = 'twilio/verifyCode';
   final kSetPIN = 'users/setmpin';
 
-  final kGetUser = 'users/getUser';
+  final kGetUser = 'users/getUser/';
   final kLogin = 'users/login';
+  final kRealtimeExchangeRates = 'fixer/exr/';
+  final kFixerConvert = 'fixer/convert';
 }
