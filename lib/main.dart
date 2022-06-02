@@ -5,6 +5,8 @@ import './Views/SplashScreen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'Views/PINScreen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +37,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
         home: SplashScreen()
-        // home: TabbarScreen()
+        // home: PINScreen(
+        //   title: 'Please set a PIN',
+        //   desc: "Prevent unauthorised access.",
+        //   isForgotPINShow: false,
+        //   enterSetConfirmPIN: 2,
+        // )
     );
   }
 }

@@ -31,18 +31,18 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(Duration(seconds: 3), () {
-      final isLogedIn = GetStorage().read('isLogin') ?? false;
-      if (isLogedIn) {
-        Get.to(PINScreen(
-          title: 'Enter your PIN',
-          desc:
-          "Enter the secure PIN to access your account",
-          isForgotPINShow: true,
-          enterSetConfirmPIN: 0,
-        ));
-      } else {
+      // final isLogedIn = GetStorage().read('isLogin') ?? false;
+      // if (isLogedIn) {
+      //   Get.to(PINScreen(
+      //     title: 'Enter your PIN',
+      //     desc:
+      //     "Enter the secure PIN to access your account",
+      //     isForgotPINShow: true,
+      //     enterSetConfirmPIN: 0,
+      //   ));
+      // } else {
         Get.to(MobileNumber());
-      }
+      // }
     });
   }
 

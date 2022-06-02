@@ -1,7 +1,9 @@
+import 'package:inr_d/Styles/ColorStyle.dart';
+
 import '../Styles/TextStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '';
 
 showLoaderGetX() {
   Get.dialog(
@@ -10,7 +12,6 @@ showLoaderGetX() {
       child: Center(
         child: Container(
           height: 60,
-          // width: 200,
           margin: EdgeInsets.only(left: 40, right: 40),
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(4)),
@@ -22,7 +23,7 @@ showLoaderGetX() {
                 width: 30,
                 child: CircularProgressIndicator(
                   strokeWidth: 3,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                  valueColor: AlwaysStoppedAnimation<Color>(ColorStyle.primaryColor),
                 ),
               ),
               Container(
@@ -30,7 +31,10 @@ showLoaderGetX() {
               ),
               Text(
                 "Loading ...",
-                style: TextStylesProductSans.textStyles_16
+                style: TextStylesProductSans.textStyles_16.apply(
+                  color: ColorStyle.primaryColor,
+                  fontWeightDelta: 1
+                )
               ),
             ],
           ),
