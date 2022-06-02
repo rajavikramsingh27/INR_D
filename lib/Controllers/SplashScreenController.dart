@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../Models/User.dart';
@@ -12,7 +11,7 @@ class SplashScreenController extends GetxController {
 
   getUser({required String mobileNumber}) async {
     final response = await API.instance.get(
-      endPoint: APIEndPoints.instance.kGetUser+'/${mobileNumber}',
+      endPoint: APIEndPoints.instance.kGetUser+mobileNumber,
     );
 
     print(response);
@@ -28,6 +27,7 @@ class SplashScreenController extends GetxController {
             "Enter the secure PIN to access your account",
             isForgotPINShow: true,
             enterSetConfirmPIN: 0,
+            isBack: false,
           ));
       }
     } else if (!response[Constants.instance.kSuccess]) {
