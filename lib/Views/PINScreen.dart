@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
@@ -11,7 +12,7 @@ import 'package:get_storage/get_storage.dart';
 import '../Views/TabbarScreen.dart';
 import '../Utils/Global.dart';
 
-class PINScreen extends StatelessWidget {
+class PINScreen extends StatefulWidget {
   String? title;
   String? desc;
 
@@ -25,8 +26,25 @@ class PINScreen extends StatelessWidget {
     required this.enterSetConfirmPIN,
   }) : super(key: key);
 
+  @override
+  _PINScreenState createState() => _PINScreenState();
+}
+
+class _PINScreenState extends State<PINScreen> {
   final controller = Get.put(PINScreenController());
 
+  FocusNode focusNode = FocusNode();
+  TextEditingController textController = TextEditingController();
+  
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration(seconds: 1), () {
+      focusNode.requestFocus();
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
@@ -77,11 +95,12 @@ class PINScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(title!, style: TextStylesProductSans.textStyles_26),
+                  Text(controller.pinConfirmValue.value.toString()),
+                  Text(widget.title!, style: TextStylesProductSans.textStyles_26),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(desc!,
+                  Text(widget.desc!,
                       style: TextStylesProductSans.textStyles_14
                           .apply(color: Colors.grey)),
                   SizedBox(
@@ -102,20 +121,20 @@ class PINScreen extends StatelessWidget {
                             height: 20,
                             width: 20,
                             decoration: BoxDecoration(
-                                color: (controller.textController.value.text.length > 0)
+                                color: (textController.text.length > 0)
                                     ? ColorStyle.primaryColor
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(30),
                                 border: Border.all(
-                                  color: (controller.textController.value.text.length > 0)
+                                  color: (textController.text.length > 0)
                                       ? Colors.transparent
                                       : Colors.grey,
                                   width: 1,
                                 )),
                             child: TextField(
                               maxLength: 4,
-                              focusNode: controller.focusNode.value,
-                              controller: controller.textController.value,
+                              focusNode: focusNode,
+                              controller: textController,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 counterText: "",
@@ -133,14 +152,14 @@ class PINScreen extends StatelessWidget {
                                         width: 0, color: Colors.transparent)),
                               ),
                               onChanged: (text) {
-                                if (enterSetConfirmPIN == 0) {
-                                  if (controller.textController.value.text.length > 3) {
+                                if (widget.enterSetConfirmPIN == 0) {
+                                  if (textController.text.length > 3) {
                                     Get.back();
                                     Get.offAll(TabbarScreen());
                                   }
-                                } else if (enterSetConfirmPIN == 1) {
-                                  if (controller.textController.value.text.length > 3) {
-                                    controller.pinConfirmValue.value = controller.textController.value.text;
+                                } else if (widget.enterSetConfirmPIN == 1) {
+                                  if (textController.text.length > 3) {
+                                    controller.pinConfirmValue.value = textController.text;
 
                                     if (controller.pinValue.value != controller.pinValue.value) {
                                       'Confirm PIN is not same with you setted PIN'.showError();
@@ -151,9 +170,9 @@ class PINScreen extends StatelessWidget {
                                       Get.offAll(TabbarScreen());
                                     }
                                   }
-                                } else if (enterSetConfirmPIN == 2) {
-                                  if (controller.textController.value.text.length > 3) {
-                                    controller.pinValue.value = controller.textController.value.text;
+                                } else if (widget.enterSetConfirmPIN == 2) {
+                                  if (textController.text.length > 3) {
+                                    controller.pinValue.value = textController.text;
                                     Get.back();
                                     Get.to(PINScreen(
                                       title: 'Confirm your PIN',
@@ -170,12 +189,12 @@ class PINScreen extends StatelessWidget {
                             height: 20,
                             width: 20,
                             decoration: BoxDecoration(
-                                color: (controller.textController.value.text.length > 1)
+                                color: (textController.text.length > 1)
                                     ? ColorStyle.primaryColor
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(30),
                                 border: Border.all(
-                                  color: (controller.textController.value.text.length > 1)
+                                  color: (textController.text.length > 1)
                                       ? Colors.transparent
                                       : Colors.grey,
                                   width: 1,
@@ -201,12 +220,12 @@ class PINScreen extends StatelessWidget {
                             height: 20,
                             width: 20,
                             decoration: BoxDecoration(
-                                color: (controller.textController.value.text.length > 2)
+                                color: (textController.text.length > 2)
                                     ? ColorStyle.primaryColor
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(30),
                                 border: Border.all(
-                                  color: (controller.textController.value.text.length > 2)
+                                  color: (textController.text.length > 2)
                                       ? Colors.transparent
                                       : Colors.grey,
                                   width: 1,
@@ -232,12 +251,12 @@ class PINScreen extends StatelessWidget {
                             height: 20,
                             width: 20,
                             decoration: BoxDecoration(
-                                color: (controller.textController.value.text.length > 3)
+                                color: (textController.text.length > 3)
                                     ? ColorStyle.primaryColor
                                     : Colors.transparent,
                                 borderRadius: BorderRadius.circular(30),
                                 border: Border.all(
-                                  color: (controller.textController.value.text.length > 3)
+                                  color: (textController.text.length > 3)
                                       ? Colors.transparent
                                       : Colors.grey,
                                   width: 1,
@@ -263,13 +282,13 @@ class PINScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      controller.focusNode.value.requestFocus();
+                      focusNode.requestFocus();
                     },
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  if (isForgotPINShow)
+                  if (widget.isForgotPINShow)
                     TextButton(
                       child: Text(
                         'Forgot PIN ?',
@@ -295,3 +314,5 @@ class PINScreen extends StatelessWidget {
     );
   }
 }
+
+

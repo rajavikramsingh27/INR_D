@@ -36,13 +36,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-        // home: SplashScreen()
-        home: PINScreen(
-          title: 'Please set a PIN',
-          desc: "Prevent unauthorised access.",
-          isForgotPINShow: false,
-          enterSetConfirmPIN: 2,
-        )
+        home: SplashScreen()
+        // home: PINScreen(
+        //   title: 'Please set a PIN',
+        //   desc: "Prevent unauthorised access.",
+        //   isForgotPINShow: false,
+        //   enterSetConfirmPIN: 2,
+        // )
     );
   }
 }
