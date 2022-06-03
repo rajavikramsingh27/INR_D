@@ -43,6 +43,7 @@ class AddCurrency extends StatelessWidget {
               ),
               DropdownButtonCustom(
                 padding: EffectStyle.padding(10, 10, 10, 10),
+                bgColor: Colors.white,
                 colorBorder: Colors.black12,
                 radiusBorder: 6,
                 textStyle: TextStylesProductSans.textStyles_14.apply(
