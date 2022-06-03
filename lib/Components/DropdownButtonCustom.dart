@@ -64,6 +64,7 @@ class DropdownButtonCustom extends StatelessWidget {
             .map<DropdownMenuItem<String>>(
                 (String value) => DropdownMenuItem<String>(
               value: value,
+
               child: Text(
                   value,
                   maxLines: 1,
