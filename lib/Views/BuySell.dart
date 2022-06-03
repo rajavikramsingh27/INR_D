@@ -7,7 +7,6 @@ import 'package:inr_d/Components/TextButtonCustom.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';
 import 'package:inr_d/Styles/ImageStyle.dart';
 import '../Components/DropdownButtonCustom.dart';
-import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Controllers/BuySellController.dart';
 import '../Views/OrderPreview.dart';
@@ -27,10 +26,11 @@ class BuySell extends StatelessWidget {
           ),
           bgColor: Colors.black,
           colorBorder: Colors.transparent,
+          dropdownColor: Colors.white,
           radiusBorder: 40,
           textStyle: TextStylesProductSans.textStyles_14.apply(
-            color: Colors.white,
-            fontWeightDelta: 1,
+            color: ColorStyle.grey,
+            fontWeightDelta: 2,
           ),
           iconWidget: Icon(
             Icons.keyboard_arrow_down,
@@ -155,16 +155,17 @@ class BuySell extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('Rate',
-                                      style: TextStylesProductSans.textStyles_13
+                                      style: TextStylesProductSans.textStyles_11
                                           .apply(
                                           color: Colors.white,
                                           fontWeightDelta: 0)),
                                   Text(
-                                      '1 ${controller.selectCurrency.value} = ${controller.conversionPrice.value} INR',
-                                      style: TextStylesProductSans.textStyles_13
+                                      '1 ${controller.selectCurrency.value} = ${controller.conversionPrice.value} INR(D)',
+                                      style: TextStylesProductSans.textStyles_10
                                           .apply(
                                           color: Colors.white,
-                                          fontWeightDelta: 0)),
+                                          fontWeightDelta: 0,
+                                      )),
                                 ],
                               ),
                             )),
@@ -220,7 +221,7 @@ class BuySell extends StatelessWidget {
                                               style: TextStylesProductSans
                                                   .textStyles_15
                                                   .apply(
-                                                  color: Colors.white,
+                                                  color: Colors.grey,
                                                   fontWeightDelta: 0)),
                                         ],
                                       ),
