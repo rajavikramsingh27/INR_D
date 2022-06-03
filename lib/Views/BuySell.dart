@@ -11,6 +11,8 @@ import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Controllers/BuySellController.dart';
 import '../Views/OrderPreview.dart';
+import '../Components/TextFieldCustom.dart';
+
 
 class BuySell extends StatelessWidget {
   BuySell({Key? key}) : super(key: key);
@@ -38,7 +40,9 @@ class BuySell extends StatelessWidget {
           listValue: controller.arrRates.value,
           selectedValue: 'Select Currency',
           onChanged: (text) {
-            controller.fixerConvert(text!);
+            controller.selectCurrency.value = text!;
+            controller.conversionPrice.value = '0.00';
+            controller.fixerConvert(text);
           },
         ));
   }
@@ -64,303 +68,336 @@ class BuySell extends StatelessWidget {
             controller.reset();
           },
           builder: (auth) {
-            return Obx(() => Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Container(
-                      height: 56,
-                      padding: EdgeInsets.only(left: 40, right: 40),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: InkWell(
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: ColorStyle.primaryColor,
-                                  border: controller.isBuy.value
-                                      ? Border(
-                                          top: BorderSide(
-                                              color: Colors.white, width: 1),
-                                          left: BorderSide(
-                                              color: Colors.white, width: 1),
-                                          right: BorderSide(
-                                              color: Colors.white, width: 1),
-                                          bottom: BorderSide(
-                                              color: Colors.white, width: 1),
-                                        )
-                                      : Border(),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                  )),
-                              child: Text('Buy',
-                                  style: TextStylesProductSans.textStyles_20
-                                      .apply(
-                                          color: Colors.white,
-                                          fontWeightDelta: 0)),
-                            ),
-                            onTap: () {
-                              controller.isBuy.value = true;
-                            },
-                          )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                              child: InkWell(
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: ColorStyle.primaryColor,
-                                  border: !controller.isBuy.value
-                                      ? Border(
-                                          top: BorderSide(
-                                              color: Colors.white, width: 1),
-                                          left: BorderSide(
-                                              color: Colors.white, width: 1),
-                                          right: BorderSide(
-                                              color: Colors.white, width: 1),
-                                          bottom: BorderSide(
-                                              color: Colors.white, width: 1),
-                                        )
-                                      : Border(),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10),
-                                  )),
-                              child: Text('Sell',
-                                  style: TextStylesProductSans.textStyles_20
-                                      .apply(
-                                          color: Colors.white,
-                                          fontWeightDelta: 0)),
-                            ),
-                            onTap: () {
-                              controller.isBuy.value = false;
-                            },
-                          )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
+            return Obx(() => SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 100,
+                  ),
+                  Container(
+                    height: 56,
+                    padding: EdgeInsets.only(left: 40, right: 40),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: InkWell(
                               child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Rate',
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: ColorStyle.primaryColor,
+                                    border: controller.isBuy.value
+                                        ? Border(
+                                      top: BorderSide(
+                                          color: Colors.white, width: 1),
+                                      left: BorderSide(
+                                          color: Colors.white, width: 1),
+                                      right: BorderSide(
+                                          color: Colors.white, width: 1),
+                                      bottom: BorderSide(
+                                          color: Colors.white, width: 1),
+                                    )
+                                        : Border(),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    )),
+                                child: Text('Buy',
                                     style: TextStylesProductSans.textStyles_20
                                         .apply(
-                                            color: Colors.white,
-                                            fontWeightDelta: 0)),
-                                Text(controller.convertedFixed.value,
-                                    style: TextStylesProductSans.textStyles_16
-                                        .apply(
-                                            color: Colors.white,
-                                            fontWeightDelta: 0)),
-                              ],
-                            ),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.only(left: 30, right: 30),
-                            decoration: BoxDecoration(
-                                color: ColorStyle.hex('#003E7A'),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Container(
-                                  height: 140,
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.only(
-                                    left: 16,
-                                    right: 16,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 16, right: 16, top: 16, bottom: 16),
-                                  decoration: BoxDecoration(
-                                      color: ColorStyle.hex('#003A70')
-                                          .withOpacity(0.6),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 90,
-                                        decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Image.asset(
-                                              ImageStyle.logoTransparent,
-                                              height: 36,
-                                            ),
-                                            Text("INR(D)",
-                                                style: TextStylesProductSans
-                                                    .textStyles_15
-                                                    .apply(
-                                                        color: Colors.white,
-                                                        fontWeightDelta: 0)),
-                                          ],
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("1000",
-                                              style: TextStylesProductSans
-                                                  .textStyles_16
-                                                  .apply(
-                                                      color: ColorStyle.grey,
-                                                      fontWeightDelta: 0)),
-                                          Text("Bal: " + '0',
-                                              style: TextStylesProductSans
-                                                  .textStyles_16
-                                                  .apply(
-                                                      color: ColorStyle.grey,
-                                                      fontWeightDelta: 0)),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Container(
-                                  height: 140,
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.only(
-                                    left: 16,
-                                    right: 16,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 16, right: 16, top: 30, bottom: 16),
-                                  decoration: BoxDecoration(
-                                      color: ColorStyle.hex('#003A70')
-                                          .withOpacity(0.6),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      // Container(
-                                      //   width: 156,
-                                      //   padding: EdgeInsets.only(
-                                      //     left: 12,
-                                      //     right: 12,
-                                      //     top: 6,
-                                      //     bottom: 6,
-                                      //   ),
-                                      //   decoration: BoxDecoration(
-                                      //     color: Colors.black,
-                                      //     borderRadius: BorderRadius.circular(20),
-                                      //   ),
-                                      //   child: Row(
-                                      //     children: [
-                                      //       Text(
-                                      //           "Select Currency",
-                                      //           style: TextStylesProductSans.textStyles_14
-                                      //               .apply(color: Colors.white, fontWeightDelta: 0)),
-                                      //       Icon(
-                                      //         Icons.keyboard_arrow_down,
-                                      //         color: Colors.white,
-                                      //       )
-                                      //     ],
-                                      //   ),
-                                      // ),
-                                      Container(
-                                        width: 156,
-                                        height: 34,
-                                        child: dropdownCurrency(),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(controller.convertedFixed.value,
-                                              style: TextStylesProductSans
-                                                  .textStyles_16
-                                                  .apply(
-                                                      color: ColorStyle.grey,
-                                                      fontWeightDelta: 0)),
-                                          Text("Bal: " + '0',
-                                              style: TextStylesProductSans
-                                                  .textStyles_16
-                                                  .apply(
-                                                      color: ColorStyle.grey,
-                                                      fontWeightDelta: 0)),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                              ],
+                                        color: Colors.white,
+                                        fontWeightDelta: 0)),
+                              ),
+                              onTap: () {
+                                controller.isBuy.value = true;
+                              },
                             )),
-                        Positioned(
-                          top: 0,
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Center(
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: InkWell(
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: ColorStyle.primaryColor,
+                                    border: !controller.isBuy.value
+                                        ? Border(
+                                      top: BorderSide(
+                                          color: Colors.white, width: 1),
+                                      left: BorderSide(
+                                          color: Colors.white, width: 1),
+                                      right: BorderSide(
+                                          color: Colors.white, width: 1),
+                                      bottom: BorderSide(
+                                          color: Colors.white, width: 1),
+                                    )
+                                        : Border(),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    )),
+                                child: Text('Sell',
+                                    style: TextStylesProductSans.textStyles_20
+                                        .apply(
+                                        color: Colors.white,
+                                        fontWeightDelta: 0)),
+                              ),
+                              onTap: () {
+                                controller.isBuy.value = false;
+                              },
+                            )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
                             child: Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  color: ColorStyle.primaryColor,
-                                  borderRadius: BorderRadius.circular(60)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset(
-                                    ImageStyle.exchange,
-                                    height: 26,
-                                    width: 26,
-                                    fit: BoxFit.fill,
-                                  ),
+                                  Text('Rate',
+                                      style: TextStylesProductSans.textStyles_16
+                                          .apply(
+                                          color: Colors.white,
+                                          fontWeightDelta: 0)),
+                                  Text(
+                                      '1 ${controller.selectCurrency.value} = ${controller.conversionPrice.value} INR',
+                                      style: TextStylesProductSans.textStyles_12
+                                          .apply(
+                                          color: Colors.white,
+                                          fontWeightDelta: 0)),
                                 ],
                               ),
-                            ),
-                          ),
-                        )
+                            )),
                       ],
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    TextButtonCustom(
-                      text: 'PREVIEW BUY',
-                      colorBG: ColorStyle.primaryColor,
-                      width: MediaQuery.of(context).size.width - 60,
-                      textStyle: TextStylesProductSans.textStyles_16
-                          .apply(color: Colors.white),
-                      onTap: () {
-                        Get.to(OrderPreview());
-                      },
-                    )
-                  ],
-                ));
+                  ),
+                  Stack(
+                    children: [
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.only(left: 30, right: 30),
+                          decoration: BoxDecoration(
+                              color: ColorStyle.hex('#003E7A'),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Container(
+                                height: 140,
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                ),
+                                padding: EdgeInsets.only(
+                                    left: 16, right: 16, top: 16, bottom: 16),
+                                decoration: BoxDecoration(
+                                    color: ColorStyle.hex('#003A70')
+                                        .withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 90,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                        BorderRadius.circular(20),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            ImageStyle.logoTransparent,
+                                            height: 36,
+                                          ),
+                                          Text('INR(D)',
+                                              style: TextStylesProductSans
+                                                  .textStyles_15
+                                                  .apply(
+                                                  color: Colors.white,
+                                                  fontWeightDelta: 0)),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            controller.convertedINR.value,
+                                            style: TextStylesProductSans
+                                                .textStyles_16
+                                                .apply(
+                                                color: ColorStyle.grey,
+                                                fontWeightDelta: 0)),
+                                        Text("Bal: " + '0',
+                                            style: TextStylesProductSans
+                                                .textStyles_16
+                                                .apply(
+                                                color: ColorStyle.grey,
+                                                fontWeightDelta: 0)),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Container(
+                                height: 140,
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                ),
+                                padding: EdgeInsets.only(
+                                    left: 16, right: 16, top: 30, bottom: 16),
+                                decoration: BoxDecoration(
+                                    color: ColorStyle.hex('#003A70')
+                                        .withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    // Container(
+                                    //   width: 156,
+                                    //   padding: EdgeInsets.only(
+                                    //     left: 12,
+                                    //     right: 12,
+                                    //     top: 6,
+                                    //     bottom: 6,
+                                    //   ),
+                                    //   decoration: BoxDecoration(
+                                    //     color: Colors.black,
+                                    //     borderRadius: BorderRadius.circular(20),
+                                    //   ),
+                                    //   child: Row(
+                                    //     children: [
+                                    //       Text(
+                                    //           "Select Currency",
+                                    //           style: TextStylesProductSans.textStyles_14
+                                    //               .apply(color: Colors.white, fontWeightDelta: 0)),
+                                    //       Icon(
+                                    //         Icons.keyboard_arrow_down,
+                                    //         color: Colors.white,
+                                    //       )
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    Container(
+                                      width: 156,
+                                      height: 34,
+                                      child: dropdownCurrency(),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        // Text(controller.convertedFixed.value,
+                                        //     style: TextStylesProductSans
+                                        //         .textStyles_16
+                                        //         .apply(
+                                        //             color: ColorStyle.grey,
+                                        //             fontWeightDelta: 0)),
+
+                                        Expanded(
+                                          child: TextField(
+                                            controller: controller.controllerTextEditing.value,
+                                            keyboardType: TextInputType.number,
+                                            style: TextStylesProductSans
+                                                .textStyles_16
+                                                .apply(
+                                                color: ColorStyle.grey,
+                                                fontWeightDelta: 0),
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                right: 16,
+                                              ),
+                                              hintText: '0.00',
+                                              hintStyle: TextStylesProductSans
+                                                  .textStyles_16
+                                                  .apply(
+                                                  color: ColorStyle.grey,
+                                                  fontWeightDelta: 0),
+                                              enabledBorder: InputBorder.none,
+                                              border: InputBorder.none,
+                                              focusedBorder: InputBorder.none,
+                                            ),
+                                            onChanged: (text) {
+                                              controller.priceConversationPrice();
+                                            },
+                                          ),
+                                        ),
+                                        Text("Bal: " + '0',
+                                            style: TextStylesProductSans
+                                                .textStyles_16
+                                                .apply(
+                                                color: ColorStyle.grey,
+                                                fontWeightDelta: 0)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                            ],
+                          )),
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Center(
+                          child: Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                                color: ColorStyle.primaryColor,
+                                borderRadius: BorderRadius.circular(60)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  ImageStyle.exchange,
+                                  height: 26,
+                                  width: 26,
+                                  fit: BoxFit.fill,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextButtonCustom(
+                    text: 'PREVIEW BUY',
+                    colorBG: ColorStyle.primaryColor,
+                    width: MediaQuery.of(context).size.width - 60,
+                    textStyle: TextStylesProductSans.textStyles_16
+                        .apply(color: Colors.white),
+                    onTap: () {
+                      Get.to(OrderPreview());
+                    },
+                  )
+                ],
+              ),
+            ));
           },
         ),
       ),
