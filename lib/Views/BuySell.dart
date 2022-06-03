@@ -11,7 +11,7 @@ import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Controllers/BuySellController.dart';
 import '../Views/OrderPreview.dart';
-import '../Components/TextFieldCustom.dart';
+import '../Utils/Global.dart';
 
 
 class BuySell extends StatelessWidget {
@@ -155,13 +155,13 @@ class BuySell extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('Rate',
-                                      style: TextStylesProductSans.textStyles_16
+                                      style: TextStylesProductSans.textStyles_13
                                           .apply(
                                           color: Colors.white,
                                           fontWeightDelta: 0)),
                                   Text(
                                       '1 ${controller.selectCurrency.value} = ${controller.conversionPrice.value} INR',
-                                      style: TextStylesProductSans.textStyles_12
+                                      style: TextStylesProductSans.textStyles_13
                                           .apply(
                                           color: Colors.white,
                                           fontWeightDelta: 0)),
@@ -313,10 +313,10 @@ class BuySell extends StatelessWidget {
                                         Expanded(
                                           child: TextField(
                                             controller: controller.controllerTextEditing.value,
-                                            keyboardType: TextInputType.number,
-                                            style: TextStylesProductSans
-                                                .textStyles_16
-                                                .apply(
+                                            keyboardType: TextInputType.numberWithOptions(
+                                              decimal: true
+                                            ),
+                                            style: TextStylesProductSans.textStyles_16.apply(
                                                 color: ColorStyle.grey,
                                                 fontWeightDelta: 0),
                                             decoration: InputDecoration(
@@ -392,7 +392,18 @@ class BuySell extends StatelessWidget {
                     textStyle: TextStylesProductSans.textStyles_16
                         .apply(color: Colors.white),
                     onTap: () {
-                      Get.to(OrderPreview());
+                      if (controller.controllerTextEditing.value.text.isEmpty) {
+                        'Please enter currency amount'.showError();
+                      } else {
+                        Get.focusScope!.unfocus();
+
+                        Get.to(OrderPreview(
+                          conversionPrice: double.parse(controller.conversionPrice.value),
+                          paymentMethodCurrency: controller.selectCurrency.value,
+                          purchasePrice: double.parse(controller.controllerTextEditing.value.text),
+                          isSell: controller.isBuy.value ? 'Purchased' : 'Sold',
+                        ));
+                      }
                     },
                   )
                 ],
