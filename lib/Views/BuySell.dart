@@ -7,7 +7,6 @@ import 'package:inr_d/Components/TextButtonCustom.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';
 import 'package:inr_d/Styles/ImageStyle.dart';
 import '../Components/DropdownButtonCustom.dart';
-import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Controllers/BuySellController.dart';
 import '../Views/OrderPreview.dart';
@@ -27,6 +26,7 @@ class BuySell extends StatelessWidget {
           ),
           bgColor: Colors.black,
           colorBorder: Colors.transparent,
+          dropdownColor: ColorStyle.primaryColor,
           radiusBorder: 40,
           textStyle: TextStylesProductSans.textStyles_14.apply(
             color: Colors.white,

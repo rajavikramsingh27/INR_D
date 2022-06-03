@@ -24,7 +24,6 @@ class AddCurrency extends StatelessWidget {
   int indexManualDeposit = 0;
   final arrDropDown = ['Select', 'AUD', 'USD', 'CAD', 'INR', 'GBP', 'EURO', 'SGD', 'NZD'];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +44,7 @@ class AddCurrency extends StatelessWidget {
                 padding: EffectStyle.padding(10, 10, 10, 10),
                 bgColor: Colors.white,
                 colorBorder: Colors.black12,
+                dropdownColor: Colors.white,
                 radiusBorder: 6,
                 textStyle: TextStylesProductSans.textStyles_14.apply(
                   color: Colors.black,
