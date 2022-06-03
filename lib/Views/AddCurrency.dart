@@ -47,8 +47,8 @@ class AddCurrency extends StatelessWidget {
                 dropdownColor: Colors.white,
                 radiusBorder: 6,
                 textStyle: TextStylesProductSans.textStyles_14.apply(
-                  color: Colors.black,
-                  fontWeightDelta: 1,
+                  color: Colors.grey,
+                  fontWeightDelta: 2,
                 ),
                 iconWidget: Icon(Icons.keyboard_arrow_down, color: ColorStyle.grey, size: 26,),
                 listValue: arrDropDown,
