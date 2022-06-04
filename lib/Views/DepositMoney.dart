@@ -17,8 +17,9 @@ import 'ManualDeposit.dart';
 class DepositMoney extends StatelessWidget {
   final String titleManualDeposit;
   final int indexManualDeposit;
+  final String currencyName;
 
-  DepositMoney({Key? key, required this.titleManualDeposit, required this.indexManualDeposit}) : super(key: key);
+  DepositMoney({Key? key, required this.currencyName, required this.titleManualDeposit, required this.indexManualDeposit}) : super(key: key);
 
   final controller = Get.put(DepositMoneyController());
 
@@ -32,76 +33,81 @@ class DepositMoney extends StatelessWidget {
           color: Colors.grey,
         ),
       ),
-      body:SingleChildScrollView(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 16,
-            ),
-            InkWell(
-              child: IgnorePointer(
-                ignoring: true,
-                child: TextFieldCustomOutline(
-                  padding: EffectStyle.padding(10, 10, 10, 10),
-                  maxLines: 5,
-                  hintText: 'Auto Deposit',
-                  textStyle: TextStylesProductSans.textStyles_18.apply(
-                    color: Colors.black,
-                    fontWeightDelta: 0,
-                  ),
-                  colorFill: ColorStyle.white,
-                  colorBoder: Colors.black12,
-                  radiusBorder: 6,
+      body: GetBuilder(
+        init: DepositMoneyController(),
+        initState: (state) {
+          controller.currencyName.value = currencyName;
+          controller.reset();
+        },
+        builder: (auth) {
+          return Obx(()=> controller.isLoading.value ? Container() : SingleChildScrollView(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 16,
                 ),
-              ),
-              onTap: () {
-                // GetStorage().write('isAutoDeposit', true);
-              },
-            ),
-            // SizedBox(
-            //   height: 16,
-            // ),
-            // Text("Content will be edit by admin",
-            //     style: TextStylesProductSans.textStyles_14
-            //         .apply(color: ColorStyle.primaryColor)),
-            SizedBox(
-              height: 50,
-            ),
-            InkWell(
-              child: IgnorePointer(
-                ignoring: true,
-                child: TextFieldCustomOutline(
-                  padding: EffectStyle.padding(10, 10, 10, 10),
-                  maxLines: 5,
-                  hintText: 'Manual Deposit',
-                  textStyle: TextStylesProductSans.textStyles_18.apply(
-                    color: Colors.black,
-                    fontWeightDelta: 0,
+                InkWell(
+                  child: IgnorePointer(
+                    ignoring: true,
+                    child: TextFieldCustomOutline(
+                      padding: EffectStyle.padding(10, 10, 10, 10),
+                      maxLines: 5,
+                      hintText: 'Auto Deposit',
+                      textStyle: TextStylesProductSans.textStyles_18.apply(
+                        color: Colors.black,
+                        fontWeightDelta: 0,
+                      ),
+                      colorFill: ColorStyle.white,
+                      colorBoder: Colors.black12,
+                      radiusBorder: 6,
+                    ),
                   ),
-                  colorFill: ColorStyle.white,
-                  colorBoder: Colors.black12,
-                  radiusBorder: 6,
+                  onTap: () {
+                    // GetStorage().write('isAutoDeposit', true);
+                  },
                 ),
-              ),
-              onTap: () {
-                  Get.to(ManualDeposit(
-                    title: titleManualDeposit,
-                    arrBankDetails: controller.arrManualDeposit[indexManualDeposit],
-                  ));
+                SizedBox(
+                  height: 16,
+                ),
+                controller.htmlContentAutoDeposit.value,
+                SizedBox(
+                  height: 50,
+                ),
+                InkWell(
+                  child: IgnorePointer(
+                    ignoring: true,
+                    child: TextFieldCustomOutline(
+                      padding: EffectStyle.padding(10, 10, 10, 10),
+                      maxLines: 5,
+                      hintText: 'Manual Deposit',
+                      textStyle: TextStylesProductSans.textStyles_18.apply(
+                        color: Colors.black,
+                        fontWeightDelta: 0,
+                      ),
+                      colorFill: ColorStyle.white,
+                      colorBoder: Colors.black12,
+                      radiusBorder: 6,
+                    ),
+                  ),
+                  onTap: () {
+                    Get.to(ManualDeposit(
+                      title: titleManualDeposit,
+                      arrBankDetails: controller.arrManualDeposit[indexManualDeposit],
+                    ));
 
-              },
+                  },
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                controller.htmlContentManualDeposit.value,
+              ],
             ),
-            // SizedBox(
-            //   height: 16,
-            // ),
-            // Text("Content will be edit by admin",
-            //     style: TextStylesProductSans.textStyles_14
-            //         .apply(color: ColorStyle.primaryColor)),
-          ],
-        ),
+          ));
+        },
       ),
     );
   }

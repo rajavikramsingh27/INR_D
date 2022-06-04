@@ -41,6 +41,9 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   http: ^0.13.4
   connectivity: ^3.0.6
+  flutter_html_all: ^3.0.0-alpha.3
+  flutter_html: ^3.0.0-alpha.3
+
 
 dev_dependencies:
   flutter_test:
