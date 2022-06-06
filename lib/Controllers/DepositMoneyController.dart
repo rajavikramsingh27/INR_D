@@ -84,9 +84,6 @@ class DepositMoneyController extends GetxController {
   reset() {
     Future.delayed(Duration(milliseconds: 100), () {
       getContentAutoDeposit();
-      Future.delayed(Duration(milliseconds: 100), () {
-        getContentManualDeposit();
-      });
     });
   }
 
@@ -96,12 +93,16 @@ class DepositMoneyController extends GetxController {
       endPoint: APIEndPoints.instance.kGetContent + '2/${currencyName}/AUTO',
     );
 
-    isLoading.value = false;
+    // isLoading.value = false;
 
     if (response![Constants.instance.kSuccess]) {
       final dictData =
       Map<String, dynamic>.from(response[Constants.instance.kData]);
       htmlContentAutoDeposit.value = Html(data: dictData['text'].toString());
+
+      Future.delayed(Duration(milliseconds: 100), () {
+        getContentManualDeposit();
+      });
     } else if (!response[Constants.instance.kSuccess]) {
 
     }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,7 +11,7 @@ import '../Views/VerificationCode.dart';
 import 'PINScreen.dart';
 import '../Utils/Constants.dart';
 import '../Controllers/SplashScreenController.dart';
-
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
 
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 1), () {
       final mobileNumber = GetStorage().read(Constants.instance.kMobileNumber) ?? '';
       debugPrint(mobileNumber);
 
@@ -45,30 +46,60 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      ImageStyle.bgSplash,
-                    ))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  ImageStyle.logoWhiteBG,
-                  height: 170,
-                ),
-                Text(
-                    "INR(D)",
-                    style: TextStylesProductSans.textStyles_40.apply(
-                        color: Colors.white
-                    )
+        body: GetBuilder(
+          init: SplashScreenController(),
+          initState: (state) {
+
+          },
+          builder: (auth) {
+            return Obx(()=>Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          ImageStyle.bgSplash,
+                        ))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SafeArea(
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(
+                              left: 30
+                          ),
+                          child: Text(
+                            'Hello '+controller.name.value,
+                            textAlign: TextAlign.left,
+                            style: TextStylesProductSans.textStyles_22.apply(
+                              color: Colors.white,
+                              fontWeightDelta: 1,
+                            ),
+                          ),
+                        )
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          ImageStyle.logoWhiteBG,
+                          height: 170,
+                        ),
+                        Text(
+                            "INR(D)",
+                            style: TextStylesProductSans.textStyles_40.apply(
+                                color: Colors.white
+                            )
+                        )
+                      ],
+                    ),
+                    SizedBox()
+                  ],
                 )
-              ],
-            )
+            ));
+          },
         )
     );  }
 }

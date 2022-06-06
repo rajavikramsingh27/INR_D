@@ -137,22 +137,18 @@ class AddCurrency extends StatelessWidget {
                 SizedBox(
                   height: 60,
                 ),
-                TextFieldCustomOutline(
-                  padding: EffectStyle.padding(10, 10, 10, 10),
-                  hintText: '',
-                  maxLines: 6,
-                  textStyle: TextStylesProductSans.textStyles_14.apply(
-                    color: Colors.black,
-                    fontWeightDelta: 1,
+                Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: ColorStyle.white,
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Colors.black12,
+                      width: 1
+                    )
                   ),
-                  colorFill: ColorStyle.white,
-                  colorBoder: Colors.black12,
-                  radiusBorder: 6,
+                  child: controller.htmlContent.value,
                 ),
-                SizedBox(
-                  height: 16,
-                ),
-                controller.htmlContent.value,
                 // Html(data: controller.htmlContent.value),
               ],
             ),

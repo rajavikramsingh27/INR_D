@@ -30,8 +30,10 @@ class AddBank extends StatelessWidget {
       padding: EffectStyle.padding(10, 10, 10, 10),
       colorBorder: Colors.black12,
       radiusBorder: 6,
+      // bgColor: Colors.white,
+      dropdownColor: Colors.white,
       textStyle: TextStylesProductSans.textStyles_14.apply(
-        color: Colors.black,
+        color: ColorStyle.grey,
         fontWeightDelta: 1,
       ),
       iconWidget: Icon(

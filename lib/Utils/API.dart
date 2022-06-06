@@ -110,4 +110,5 @@ class APIEndPoints {
   final kRealtimeExchangeRates = 'fixer/exr/';
   final kFixerConvert = 'fixer/convert';
   final kGetContent = 'contentApp/getContent/';
+  final kGetExr = 'fixer/getExr';
 }

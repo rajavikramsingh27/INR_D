@@ -89,6 +89,9 @@ class VerificationCodeController extends GetxController {
           'code': otpValues
         });
 
+    debugPrint("response response response response response response ");
+    debugPrint(response.toString());
+
     if (response!['status'] != null && response['status']) {
       phoneNumber.value = phoneNumber.value.replaceAll('+', '');
       GetStorage().write(Constants.instance.kMobileNumber, phoneNumber.value);

@@ -402,7 +402,7 @@ class BuySell extends StatelessWidget {
                           conversionPrice: double.parse(controller.conversionPrice.value),
                           paymentMethodCurrency: controller.selectCurrency.value,
                           purchasePrice: double.parse(controller.controllerTextEditing.value.text),
-                          isSell: controller.isBuy.value ? 'Purchased' : 'Sold',
+                          isSell: controller.isBuy.value,
                         ));
                       }
                     },

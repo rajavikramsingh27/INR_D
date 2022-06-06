@@ -13,7 +13,7 @@ class OrderPreview extends StatelessWidget {
   final double? conversionPrice;
   final String? paymentMethodCurrency;
   final double? purchasePrice;
-  final String isSell;
+  final bool isSell;
 
   OrderPreview({Key? key,
     required this.conversionPrice,
@@ -44,7 +44,7 @@ class OrderPreview extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                      'Sucessfully ${isSell}',
+                      'Sucessfully ${isSell ? 'Purchased' : 'Sold'}',
                       style: TextStylesProductSans.textStyles_20.apply(
                           color: Colors.white
                       )
@@ -109,13 +109,11 @@ class OrderPreview extends StatelessWidget {
       body: GetBuilder(
         init: OrderPreviewController(),
         initState: (state) {
-          // conversionPrice
-          // purchasePrice
-          // controller.adminFee.value
-          // controller.otherFee.value
-
-          controller.totalPrice.value = ((conversionPrice!*purchasePrice!)+controller.adminFee.value+controller.otherFee.value).toStringAsFixed(2);
-          
+          controller.purchasePrice.value = purchasePrice!;
+          controller.conversionPrice.value = conversionPrice!;
+          Future.delayed(Duration(milliseconds: 100), () {
+            controller.getFixer(paymentMethodCurrency!, isSell);
+          });
           controller.reset();
         },
         builder: (auth) {
@@ -188,7 +186,7 @@ class OrderPreview extends StatelessWidget {
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
                       Text(
-                          '${controller.adminFee.value} INR(D)',
+                          '${controller.admin_fees.value} INR(D)',
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
                     ],
@@ -200,7 +198,8 @@ class OrderPreview extends StatelessWidget {
                       Text("Other Fee",
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
-                      Text("0.00",
+                      Text(
+                          '${controller.other_fees.value} INR(D)',
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
                     ],
