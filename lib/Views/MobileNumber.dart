@@ -44,7 +44,8 @@ class MobileNumber extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Let's Get Started",
+                      Text(
+                          "Let's Get Started",
                           style: TextStylesProductSans.textStyles_26),
                       Text("We will send an OTP to your mobile number",
                           style: TextStylesProductSans.textStyles_16
@@ -160,7 +161,7 @@ class MobileNumber extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         onTap: () async {
                           final phoneNumber = '+${controller.phoneCode.value}${controller.controllerMobileNumber.value.text}';
-                          controller.sendForOTP(phoneNumber);
+                          controller.otpValidation(phoneNumber);
                         },
                       ),
                     ],

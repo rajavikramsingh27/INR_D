@@ -13,7 +13,7 @@ class MobileNumberController extends GetxController {
   Rx<TextEditingController> controllerMobileNumber =
       TextEditingController().obs;
 
-  void sendForOTP(String phoneNumber) async {
+  void otpValidation(String phoneNumber) async {
     if (controllerMobileNumber.value.text.isEmpty) {
       'Enter your mobile number'.showError();
     } else if (controllerMobileNumber.value.text.length <
@@ -23,6 +23,11 @@ class MobileNumberController extends GetxController {
       // Get.to(VerificationCode());
       // return;
 
+      sendOTP(phoneNumber);
+    }
+  }
+
+  void sendOTP(String phoneNumber) async {
       Get.focusScope!.unfocus();
       final response = await API.instance.post(
           endPoint: APIEndPoints.instance.kTwilioSendCode,
@@ -36,6 +41,6 @@ class MobileNumberController extends GetxController {
         controlller.phoneNumber.value = phoneNumber;
         Get.to(VerificationCode());
       }
-    }
+
   }
 }

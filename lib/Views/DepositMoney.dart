@@ -49,61 +49,109 @@ class DepositMoney extends StatelessWidget {
                 SizedBox(
                   height: 16,
                 ),
-                InkWell(
-                  child: IgnorePointer(
-                    ignoring: true,
-                    child: TextFieldCustomOutline(
-                      padding: EffectStyle.padding(10, 10, 10, 10),
-                      maxLines: 5,
-                      hintText: 'Auto Deposit',
-                      textStyle: TextStylesProductSans.textStyles_18.apply(
-                        color: Colors.black,
-                        fontWeightDelta: 0,
-                      ),
-                      colorFill: ColorStyle.white,
-                      colorBoder: Colors.black12,
-                      radiusBorder: 6,
-                    ),
+                // InkWell(
+                //   child: IgnorePointer(
+                //     ignoring: true,
+                //     child: TextFieldCustomOutline(
+                //       padding: EffectStyle.padding(10, 10, 10, 10),
+                //       maxLines: 5,
+                //       hintText: 'Auto Deposit',
+                //       textStyle: TextStylesProductSans.textStyles_18.apply(
+                //         color: Colors.black,
+                //         fontWeightDelta: 0,
+                //       ),
+                //       colorFill: ColorStyle.white,
+                //       colorBoder: Colors.black12,
+                //       radiusBorder: 6,
+                //     ),
+                //   ),
+                //   onTap: () {
+                //     // GetStorage().write('isAutoDeposit', true);
+                //   },
+                // ),
+                // SizedBox(
+                //   height: 16,
+                // ),
+                Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      color: ColorStyle.white,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                          color: Colors.black12,
+                          width: 1
+                      )
                   ),
-                  onTap: () {
-                    // GetStorage().write('isAutoDeposit', true);
-                  },
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                controller.htmlContentAutoDeposit.value,
-                SizedBox(
-                  height: 50,
-                ),
-                InkWell(
-                  child: IgnorePointer(
-                    ignoring: true,
-                    child: TextFieldCustomOutline(
-                      padding: EffectStyle.padding(10, 10, 10, 10),
-                      maxLines: 5,
-                      hintText: 'Manual Deposit',
-                      textStyle: TextStylesProductSans.textStyles_18.apply(
-                        color: Colors.black,
-                        fontWeightDelta: 0,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '   Auto Deposit',
+                        style: TextStylesProductSans.textStyles_18.apply(
+                          color: ColorStyle.grey,
+                          fontWeightDelta: 0,
+                        ),
                       ),
-                      colorFill: ColorStyle.white,
-                      colorBoder: Colors.black12,
-                      radiusBorder: 6,
-                    ),
+                      controller.htmlContentAutoDeposit.value
+                    ],
                   ),
-                  onTap: () {
-                    Get.to(ManualDeposit(
-                      title: titleManualDeposit,
-                      arrBankDetails: controller.arrManualDeposit[indexManualDeposit],
-                    ));
+                ),
 
-                  },
-                ),
                 SizedBox(
-                  height: 16,
+                  height: 60,
                 ),
-                controller.htmlContentManualDeposit.value,
+                // InkWell(
+                //   child: IgnorePointer(
+                //     ignoring: true,
+                //     child: TextFieldCustomOutline(
+                //       padding: EffectStyle.padding(10, 10, 10, 10),
+                //       maxLines: 5,
+                //       hintText: 'Manual Deposit',
+                //       textStyle: TextStylesProductSans.textStyles_18.apply(
+                //         color: Colors.black,
+                //         fontWeightDelta: 0,
+                //       ),
+                //       colorFill: ColorStyle.white,
+                //       colorBoder: Colors.black12,
+                //       radiusBorder: 6,
+                //     ),
+                //   ),
+                //   onTap: () {
+                //     Get.to(ManualDeposit(
+                //       title: titleManualDeposit,
+                //       arrBankDetails: controller.arrManualDeposit[indexManualDeposit],
+                //     ));
+                //
+                //   },
+                // ),
+                // SizedBox(
+                //   height: 16,
+                // ),
+                Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      color: ColorStyle.white,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                          color: Colors.black12,
+                          width: 1
+                      )
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '   Manual Deposit',
+                        style: TextStylesProductSans.textStyles_18.apply(
+                          color: ColorStyle.grey,
+                          fontWeightDelta: 0,
+                        ),
+                      ),
+                      controller.htmlContentManualDeposit.value,
+                    ],
+                  )
+                )
               ],
             ),
           ));

@@ -19,11 +19,12 @@ class User {
     this.mpin,
     this.state,
     this.country,
+    this.kycStatus,
     this.countryCode,
     this.referenceId,
     this.referredId,
     this.status,
-    this.modifiedAt,
+    // this.modifiedAt,
   });
 
   String? id;
@@ -35,11 +36,12 @@ class User {
   String? mpin;
   String? state;
   String? country;
+  String? kycStatus;
   String? countryCode;
   String? referenceId;
   String? referredId;
   String? status;
-  DateTime? modifiedAt;
+  // String? modifiedAt;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["_id"],
@@ -51,11 +53,12 @@ class User {
     mpin: json["mpin"],
     state: json["state"],
     country: json["country"],
+    kycStatus: json["kyc_status"],
     countryCode: json["country_code"],
     referenceId: json["reference_id"],
     referredId: json["referred_id"],
     status: json["status"],
-    modifiedAt: DateTime.parse(json["modified_at"]),
+    // modifiedAt: json["modified_at"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -68,10 +71,11 @@ class User {
     "mpin": mpin,
     "state": state,
     "country": country,
+    "kyc_status": kycStatus,
     "country_code": countryCode,
     "reference_id": referenceId,
     "referred_id": referredId,
     "status": status,
-    "modified_at": modifiedAt,
+    // "modified_at": modifiedAt,
   };
 }

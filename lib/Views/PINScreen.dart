@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
 import 'package:inr_d/Components/TextButtonCustom.dart';
+import 'package:inr_d/Controllers/MobileNumberController.dart';
 import 'package:inr_d/Controllers/PINScreenController.dart';
 import 'package:inr_d/Styles/ColorStyle.dart';
 import 'package:inr_d/Styles/TextStyles.dart';
@@ -165,6 +166,9 @@ class _PINScreenState extends State<PINScreen> {
 
                                 if (widget.enterSetConfirmPIN == 0) {
                                   if (textController.text.length > 3) {
+
+                                    debugPrint(textController.text);
+
                                     controller.mpin.value = textController.text;
                                     controller.login();
                                   }
@@ -173,8 +177,8 @@ class _PINScreenState extends State<PINScreen> {
                                     controller.pinConfirmValue.value = textController.text;
 
                                     debugPrint('pin pin pin pin pin ');
-                                    debugPrint(controller.pinValue.value);
-                                    debugPrint(controller.pinConfirmValue.value);
+                                    debugPrint(controller.pinValue.value.toString());
+                                    debugPrint(controller.pinConfirmValue.value.toString());
 
                                     if (controller.pinValue.value != controller.pinConfirmValue.value) {
                                       'Confirm PIN is not same with you setted PIN'
@@ -188,9 +192,9 @@ class _PINScreenState extends State<PINScreen> {
                                   if (textController.text.length > 3) {
                                     controller.pinValue.value = textController.text;
 
-                                    debugPrint('pin pin pin pin pin ');
-                                    debugPrint(controller.pinValue.value);
-                                    debugPrint(controller.pinConfirmValue.value);
+                                    // debugPrint('pin pin pin pin pin ');
+                                    // debugPrint(controller.pinValue.value.toString());
+                                    // debugPrint(controller.pinConfirmValue.value.toString());
 
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => PINScreen(
                                       title: 'Confirm your PIN',
@@ -333,20 +337,20 @@ class _PINScreenState extends State<PINScreen> {
                             .apply(color: ColorStyle.primaryColor),
                       ),
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => PINScreen(
-                          title: 'Please set a PIN',
-                          desc: "Prevent unauthorised access.",
-                          isForgotPINShow: false,
-                          enterSetConfirmPIN: 2,
-                        )));
 
-                        // Get.back();
-                        // Get.to(PINScreen(
+                        final controllerMobileNumber = Get.put(MobileNumberController());
+
+                        final mobileNumber = GetStorage().read(Constants.instance.kMobileNumber) ?? '';
+                        debugPrint(mobileNumber);
+
+                        controllerMobileNumber.sendOTP("+${mobileNumber}");
+
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => PINScreen(
                         //   title: 'Please set a PIN',
                         //   desc: "Prevent unauthorised access.",
                         //   isForgotPINShow: false,
                         //   enterSetConfirmPIN: 2,
-                        // ));
+                        // )));
                       },
                     ),
                 ],
