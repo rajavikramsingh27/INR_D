@@ -44,6 +44,9 @@ class PINScreenController extends GetxController {
       'inrd_no': mobileNumber,
       'mpin': mpin.value,
     };
+    debugPrint(params.toString());
+
+
 
     final response = await API.instance.post(
         endPoint: APIEndPoints.instance.kLogin, params: params
