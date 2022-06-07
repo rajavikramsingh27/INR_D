@@ -135,7 +135,7 @@ class AddBank extends StatelessWidget {
     return Scaffold(
         appBar: AppBarStyle(
           overlayStyle: SystemUiOverlayStyle.dark,
-          title: 'Add $title Bank',
+          title: '$title Bank',
           leading: BackButton(
             color: ColorStyle.grey,
           ),
@@ -183,6 +183,7 @@ class AddBank extends StatelessWidget {
                           radiusBorder: 6,
                         );
                       },
+
                     ),
                     SizedBox(
                       height: 16,

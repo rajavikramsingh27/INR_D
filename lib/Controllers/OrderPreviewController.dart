@@ -20,13 +20,9 @@ class OrderPreviewController extends GetxController {
   }
 
   getFixer(String currency, bool isSell) async {
-    // debugPrint(currency);
-
     final response = await API.instance.get(
         endPoint: APIEndPoints.instance.kGetExr,
     );
-
-    // debugPrint(response.toString());
 
     if (response![Constants.instance.kData].toString().isNotEmpty) {
       final dictMessages = Map<String, dynamic>.from(response[Constants.instance.kData]);
@@ -43,14 +39,34 @@ class OrderPreviewController extends GetxController {
 
       debugPrint(dictBuySell.toString());
 
-      admin_fees.value = dictBuySell['admin_fees'];
-      other_fees.value = dictBuySell['other_fees'];
-      inflation_rate.value = dictBuySell['inflation_rate'];
+      if (dictBuySell['admin_fees'] != null) {
+        admin_fees.value = dictBuySell['admin_fees'] ?? 0.0;
+      }
+
+      if (dictBuySell['other_fees'] != null) {
+        other_fees.value = dictBuySell['other_fees'] ?? 0.0;
+      }
+
+      if (dictBuySell['inflation_rate'] != null) {
+        inflation_rate.value = double.parse(dictBuySell['inflation_rate'] ?? '0.0');
+      }
 
       debugPrint(admin_fees.value.toString());
       debugPrint(other_fees.value.toString());
+      debugPrint(inflation_rate.value.toString());
 
-      totalPrice.value = ((conversionPrice.value*purchasePrice.value)+admin_fees.value+other_fees.value).toStringAsFixed(2);
+      final rateAmount = (conversionPrice.value*inflation_rate.value)/100.0;
+
+      // Buy + krna
+//     sell - krna
+//   inflamation rate in 10%
+
+      if (isSell) {
+        totalPrice.value = ((conversionPrice.value*purchasePrice.value)-rateAmount-admin_fees.value-other_fees.value).toStringAsFixed(2);
+      } else {
+        totalPrice.value = ((conversionPrice.value*purchasePrice.value)+rateAmount-admin_fees.value-other_fees.value).toStringAsFixed(2);
+      }
+      debugPrint(totalPrice.value);
 
     } else if (!response[Constants.instance.kSuccess]) {
 

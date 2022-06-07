@@ -173,12 +173,15 @@ class OrderPreview extends StatelessWidget {
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
                       Text(
-                          '\$${purchasePrice!}',
+                          paymentMethodCurrency!.contains('INR') ? 'INR ${purchasePrice!}' : '\$${purchasePrice!}',
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
                     ],
                   ),
+
+                  if (controller.admin_fees.value != 0.0)
                   SizedBox(height: 50,),
+                  if (controller.admin_fees.value != 0.0)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -191,7 +194,25 @@ class OrderPreview extends StatelessWidget {
                               .apply(color: Colors.grey)),
                     ],
                   ),
+                  if (controller.inflation_rate.value != 0.0)
                   SizedBox(height: 50,),
+                  if (controller.inflation_rate.value != 0.0)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                          'Inflation Rate',
+                          style: TextStylesProductSans.textStyles_16
+                              .apply(color: Colors.grey)),
+                      Text(
+                          isSell ? '- ${controller.inflation_rate.value}  % INR(D)' : '+${controller.inflation_rate.value} % INR(D)',
+                          style: TextStylesProductSans.textStyles_16
+                              .apply(color: Colors.grey)),
+                    ],
+                  ),
+                  if (controller.other_fees.value != 0.0)
+                  SizedBox(height: 50,),
+                  if (controller.other_fees.value != 0.0)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
