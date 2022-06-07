@@ -70,5 +70,6 @@ class ImageStyle {
   static const String   Card4 = baseImage + "Card4.png";
   static const String   Card5 = baseImage + "Card5.png";
   static const String   uploaded = baseImage + "uploaded.png";
+  static const String   Layer9Image = baseImage + "Layer9Image.png";
 
 }

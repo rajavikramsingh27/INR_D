@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:inr_d/Controllers/WalletController.dart';
+import 'package:inr_d/Styles/ImageStyle.dart';
 import '../Components/AppBarStyle.dart';
 import '../Components/DropdownButtonCustom.dart';
 import '../Components/TextButtonCustom.dart';
@@ -20,6 +21,67 @@ class Wallet extends StatelessWidget {
 
   final controller = Get.put(WalletController());
 
+  // dropdownButtonCustom() {
+  //   return DropdownButton<String>(
+  //
+  //     dropdownColor: ColorStyle.primaryColor,
+  //     isExpanded: true,
+  //     iconSize: 0,
+  //
+  //     hint: Container(
+  //       alignment: Alignment.center,
+  //       child: Text(
+  //         "+ Add Bank",
+  //         textAlign: TextAlign.center,
+  //         style: TextStylesProductSans.textStyles_16.apply(
+  //           color: ColorStyle.primaryColor,
+  //           fontWeightDelta: 1,
+  //         ),
+  //       ),
+  //     ),
+  //     items: <String>['HDFC Bank', 'Punjab Bank', 'India Bank', ' Bank'].map((String value) {
+  //       return DropdownMenuItem<String>(
+  //
+  //
+  //         value: value,
+  //         child: Text(value),
+  //       );
+  //     }).toList(),
+  //
+  //     onChanged: (text) {
+  //       controller.selectedDropDown.value = text!;
+  //     },
+  //   );
+  // }
+
+  dropdownButtonCustom1() {
+    return DropdownButtonCustom(
+
+      padding: EffectStyle.padding(120, 0, 10, 10),
+      colorBorder: Colors.white,
+      radiusBorder: 6,
+      // bgColor: Colors.white,
+
+      dropdownColor: ColorStyle.primaryColor,
+      bgColor: ColorStyle.primaryColor,
+
+      textStyle: TextStylesProductSans.textStyles_14.apply(
+
+        color: ColorStyle.white,
+        fontWeightDelta: 1,
+      ),
+      iconWidget: Icon(
+        Icons.keyboard_arrow_down,
+        color: ColorStyle.primaryColor,
+        size: 26,
+      ),
+      listValue: ['+ ADD BANK', 'HDFC Bank', 'Punjab BankPunjab Bank', ],
+      selectedValue: '+ ADD BANK',
+      onChanged: (text) {
+        controller.selectedDropDown.value = text!;
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,19 +198,10 @@ class Wallet extends StatelessWidget {
                           SizedBox(
                             height:26,
                           ),
-                          TextButtonCustom(
-                            text: "+ ADD BANK",
-                            colorBG: ColorStyle.primaryColor,
-                            textStyle: TextStylesProductSans.textStyles_16
-                                .apply(color: Colors.white),
-                            width: MediaQuery.of(context).size.width,
-                            onTap: () {
-                              Get.to(AddBank(
-                                title: controller.chooseUSD[index],
-                                arrBankFormDetails: controller.arrManualDeposit[index],
-                              ));
-                            },
-                          ),
+
+
+                          dropdownButtonCustom1(),
+
                           SizedBox(
                             height:20,
                           ),

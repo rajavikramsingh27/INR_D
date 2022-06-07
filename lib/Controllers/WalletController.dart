@@ -17,6 +17,7 @@ class WalletController extends GetxController {
 
 RxList<String> arrBankDetails = [''].obs;
 
+RxString selectedDropDown = ''.obs;
   RxList<String> chooseUSD = [
     'AUD',
     'USD',
@@ -106,6 +107,7 @@ RxList<String> images = <String>[
   RxList<bool> arrSelect = [false].obs;
 
   reset() {
+    selectedDropDown.value = '';
     arrSelect.clear();
     arrBankDetails.clear();
 

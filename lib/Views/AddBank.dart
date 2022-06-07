@@ -183,6 +183,7 @@ class AddBank extends StatelessWidget {
                           radiusBorder: 6,
                         );
                       },
+
                     ),
                     SizedBox(
                       height: 16,

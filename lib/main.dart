@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inr_d/Views/AddCard.dart';
 import 'package:inr_d/Views/TabbarScreen.dart';
+import 'package:inr_d/Views/Wallet.dart';
 import './Views/SplashScreen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-        home: SplashScreen()
+        home: Wallet()
         // home: PINScreen(
         //   title: 'Please set a PIN',
         //   desc: "Prevent unauthorised access.",

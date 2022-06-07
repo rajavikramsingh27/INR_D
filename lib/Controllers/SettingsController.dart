@@ -6,6 +6,11 @@ class SettingsController extends GetxController {
 
   RxList<String> arrListDetails = [''].obs;
 
+  RxList<String> bankValue = [
+    'Your Own Account',
+    'Third Party Account',
+
+  ].obs;
 
   RxList<String> chooseHelp = [
     'Help',
