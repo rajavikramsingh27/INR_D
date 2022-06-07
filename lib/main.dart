@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:inr_d/Views/AddCard.dart';
 import 'package:inr_d/Views/TabbarScreen.dart';
 import './Views/SplashScreen.dart';
 import 'package:get/get.dart';
