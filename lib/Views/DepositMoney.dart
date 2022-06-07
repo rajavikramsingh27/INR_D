@@ -23,6 +23,24 @@ class DepositMoney extends StatelessWidget {
 
   final controller = Get.put(DepositMoneyController());
 
+  decorationForBoxes() {
+    return BoxDecoration(
+        color: ColorStyle.white,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+            color: Colors.black12,
+            width: 1
+        ),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 0),
+            blurRadius: 4,
+            color: Colors.black12,
+          )
+        ]
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,21 +92,14 @@ class DepositMoney extends StatelessWidget {
                 // ),
                 Container(
                   padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                      color: ColorStyle.white,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                          color: Colors.black12,
-                          width: 1
-                      )
-                  ),
+                  decoration: decorationForBoxes(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         '   Auto Deposit',
-                        style: TextStylesProductSans.textStyles_18.apply(
+                        style: TextStylesProductSans.textStyles_14.apply(
                           color: ColorStyle.grey,
                           fontWeightDelta: 0,
                         ),
@@ -101,57 +112,32 @@ class DepositMoney extends StatelessWidget {
                 SizedBox(
                   height: 60,
                 ),
-                // InkWell(
-                //   child: IgnorePointer(
-                //     ignoring: true,
-                //     child: TextFieldCustomOutline(
-                //       padding: EffectStyle.padding(10, 10, 10, 10),
-                //       maxLines: 5,
-                //       hintText: 'Manual Deposit',
-                //       textStyle: TextStylesProductSans.textStyles_18.apply(
-                //         color: Colors.black,
-                //         fontWeightDelta: 0,
-                //       ),
-                //       colorFill: ColorStyle.white,
-                //       colorBoder: Colors.black12,
-                //       radiusBorder: 6,
-                //     ),
-                //   ),
-                //   onTap: () {
-                //     Get.to(ManualDeposit(
-                //       title: titleManualDeposit,
-                //       arrBankDetails: controller.arrManualDeposit[indexManualDeposit],
-                //     ));
-                //
-                //   },
-                // ),
-                // SizedBox(
-                //   height: 16,
-                // ),
-                Container(
-                  padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                      color: ColorStyle.white,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                          color: Colors.black12,
-                          width: 1
+                InkWell(
+                  child: Container(
+                      padding: EdgeInsets.all(6),
+                      decoration: decorationForBoxes(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '   Manual Deposit',
+                            style: TextStylesProductSans.textStyles_14.apply(
+                              color: ColorStyle.grey,
+                              fontWeightDelta: 0,
+                            ),
+                          ),
+                          controller.htmlContentManualDeposit.value,
+                        ],
                       )
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '   Manual Deposit',
-                        style: TextStylesProductSans.textStyles_18.apply(
-                          color: ColorStyle.grey,
-                          fontWeightDelta: 0,
-                        ),
-                      ),
-                      controller.htmlContentManualDeposit.value,
-                    ],
-                  )
-                )
+                  onTap: () {
+                    Get.to(ManualDeposit(
+                      title: titleManualDeposit,
+                      arrBankDetails: controller.arrManualDeposit[indexManualDeposit],
+                    ));
+                  },
+                ),
+
               ],
             ),
           ));

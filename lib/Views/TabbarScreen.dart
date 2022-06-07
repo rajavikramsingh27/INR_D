@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inr_d/Views/Setting.dart';
+import 'package:inr_d/Views/Withdraw.dart';
 import '../Controllers/TabbarScreenController.dart';
 import '../Styles/ColorStyle.dart';
 import '../Styles/ImageStyle.dart';
@@ -19,13 +21,9 @@ class TabbarScreen extends StatelessWidget {
   final arrBody = [
     Home(),
     AddCurrency(),
-    Container(
-      color: Colors.green,
-    ),
+    Withdraw(),
     Wallet(),
-    Container(
-      color: Colors.blue,
-    ),
+    Setting()
   ];
 
   @override

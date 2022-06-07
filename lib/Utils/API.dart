@@ -2,11 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 import 'package:connectivity/connectivity.dart';
 import '../Utils/Global.dart';
-
-
 
 class API {
   API._privateConstructor();

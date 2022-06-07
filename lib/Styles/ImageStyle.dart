@@ -43,4 +43,32 @@ class ImageStyle {
   static const String tDeposit = baseImage + "tDeposit.png";
   static const String bgBuySell = baseImage + "bgBuySell.png";
   static const String exchange = baseImage + "exchange.png";
+
+  static const String telegram = baseImage + "telegram.png";
+  static const String whatsUp = baseImage + "whatsUp.png";
+  static const String discord = baseImage + "Discord.png";
+  static const String twitter = baseImage + "twitter.png";
+  static const String email = baseImage + "Email.png";
+  static const String call = baseImage + "Call.png";
+
+  static const String youTube = baseImage + "youTube.png";
+  static const String   dropdoun = baseImage + "dropdoun.png";
+  static const String   Scanner = baseImage + "Scanner.png";
+
+
+  static const String   ScanCode = baseImage + "ScanCode.png";
+  static const String   share = baseImage + "share.png";
+
+  static const String     CopyWhite = baseImage + "CopyWhite.png";
+  static const String   card = baseImage + "card.png";
+  static const String   Copyy = baseImage + "Copyy.png";
+
+  static const String   QuetionMark = baseImage + "QuetionMark.png";
+  static const String   Card2 = baseImage + "Card2.png";
+  static const String   Card3 = baseImage + "Card3.png";
+
+  static const String   Card4 = baseImage + "Card4.png";
+  static const String   Card5 = baseImage + "Card5.png";
+  static const String   uploaded = baseImage + "uploaded.png";
+
 }
