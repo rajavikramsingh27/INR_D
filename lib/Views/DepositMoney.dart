@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../Components/AppBarStyle.dart';
-import '../Components/DropdownButtonCustom.dart';
-import '../Components/TextButtonCustom.dart';
-import '../Components/TextFieldCustomOutline.dart';
 import '../Controllers/DepositMoneyController.dart';
 import '../Styles/ColorStyle.dart';
-import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
 import 'ManualDeposit.dart';
-
+import '../Views/AddBank.dart';
 
 class DepositMoney extends StatelessWidget {
   final String titleManualDeposit;
@@ -22,7 +16,7 @@ class DepositMoney extends StatelessWidget {
   DepositMoney({Key? key, required this.currencyName, required this.titleManualDeposit, required this.indexManualDeposit}) : super(key: key);
 
   final controller = Get.put(DepositMoneyController());
-
+  bool isOwn = true;
   decorationForBoxes() {
     return BoxDecoration(
         color: ColorStyle.white,
@@ -38,6 +32,141 @@ class DepositMoney extends StatelessWidget {
             color: Colors.black12,
           )
         ]
+    );
+  }
+
+  dropdownButtonCustom() {
+    final arrDropDown = ['Your Own Account', 'Third Party Account'];
+
+    return Get.dialog(
+      barrierColor: Colors.transparent,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Material(
+                color: Colors.transparent,
+                child: Container(
+                  width: 250,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                margin: EdgeInsets.only(
+                  top: 120,
+                  left: 20,
+                  right: 20
+                ),
+                padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  top: 16,
+                  bottom: 16,
+                ),
+                child: ListView.separated(
+                  itemCount: arrDropDown.length,
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) {
+                    return Container(
+                      height: 1,
+                      color: ColorStyle.grey.withOpacity(0.6),
+                      margin: EdgeInsets.only(
+                        top: 16,
+                        bottom: 16
+                      ),
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            arrDropDown[index],
+                            textAlign: TextAlign.center,
+                            style: TextStylesProductSans.textStyles_16.apply(
+                              color: ColorStyle.grey,
+                              fontWeightDelta: 1,
+                            ),
+                          ),
+                          SizedBox(width: 40,),
+                          Icon(Icons.arrow_forward_ios_sharp, color: ColorStyle.grey, size: 20)
+                        ],
+                      ),
+                      onTap: () {
+                        isOwn = (index == 0) ? true : false;
+                        Get.back();
+                        alert();
+                      },
+                    );
+                  },
+                ),
+              )
+            ),
+          ],
+        )
+    );
+  }
+
+  alert() {
+    return Get.defaultDialog(
+      radius: 6,
+      title: 'Sorry!',
+      titleStyle:  TextStylesProductSans.textStyles_20.apply(
+        color: ColorStyle.grey,
+        fontWeightDelta: 1,
+      ),
+      content: Text(
+        'You have to add bank details.',
+        style: TextStylesProductSans.textStyles_16.apply(
+          color: ColorStyle.grey,
+          fontWeightDelta: 1,
+        ),
+      ),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextButton(
+              child: Text(
+                'Add Bank',
+                style: TextStylesProductSans.textStyles_16.apply(
+                  color: Colors.blue,
+                  fontWeightDelta: 1,
+                ),
+              ),
+              onPressed: () {
+                Get.back();
+                Get.to(AddBank(
+                  title: (isOwn ? 'Your Own ' : 'Third Party ')+currencyName,
+                  arrBankFormDetails: controller.arrManualDeposit[indexManualDeposit],
+                  isOwn: isOwn ? true : false ,
+                ));
+              },
+            ),
+          TextButton(
+            child: Text(
+              'Cancel',
+              style: TextStylesProductSans.textStyles_16.apply(
+                color: Colors.red,
+                fontWeightDelta: 1,
+              ),
+            ),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          ],
+        )
+      ]
     );
   }
 
@@ -67,46 +196,28 @@ class DepositMoney extends StatelessWidget {
                 SizedBox(
                   height: 16,
                 ),
-                // InkWell(
-                //   child: IgnorePointer(
-                //     ignoring: true,
-                //     child: TextFieldCustomOutline(
-                //       padding: EffectStyle.padding(10, 10, 10, 10),
-                //       maxLines: 5,
-                //       hintText: 'Auto Deposit',
-                //       textStyle: TextStylesProductSans.textStyles_18.apply(
-                //         color: Colors.black,
-                //         fontWeightDelta: 0,
-                //       ),
-                //       colorFill: ColorStyle.white,
-                //       colorBoder: Colors.black12,
-                //       radiusBorder: 6,
-                //     ),
-                //   ),
-                //   onTap: () {
-                //     // GetStorage().write('isAutoDeposit', true);
-                //   },
-                // ),
-                // SizedBox(
-                //   height: 16,
-                // ),
-                Container(
-                  padding: EdgeInsets.all(6),
-                  decoration: decorationForBoxes(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '   Auto Deposit',
-                        style: TextStylesProductSans.textStyles_14.apply(
-                          color: ColorStyle.grey,
-                          fontWeightDelta: 0,
+                GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: decorationForBoxes(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '   Auto Deposit',
+                          style: TextStylesProductSans.textStyles_14.apply(
+                            color: ColorStyle.grey,
+                            fontWeightDelta: 0,
+                          ),
                         ),
-                      ),
-                      controller.htmlContentAutoDeposit.value
-                    ],
+                        controller.htmlContentAutoDeposit.value
+                      ],
+                    ),
                   ),
+                  onTap: () {
+                    dropdownButtonCustom();
+                  },
                 ),
 
                 SizedBox(
@@ -146,3 +257,5 @@ class DepositMoney extends StatelessWidget {
     );
   }
 }
+
+
