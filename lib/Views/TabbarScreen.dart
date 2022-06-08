@@ -21,9 +21,11 @@ class TabbarScreen extends StatelessWidget {
   final arrBody = [
     Home(),
     AddCurrency(),
-    Withdraw(),
+    Container(color: Colors.red,),
+    // Withdraw(),
     Wallet(),
-    Setting()
+    // Setting()
+    Container(color: Colors.yellow,),
   ];
 
   @override
@@ -105,7 +107,8 @@ class TabbarScreen extends StatelessWidget {
                   controller.index.value = index;
                 },
               ),
-            ));
+            )
+        );
       },
     );
   }

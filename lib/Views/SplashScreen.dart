@@ -12,6 +12,8 @@ import 'PINScreen.dart';
 import '../Utils/Constants.dart';
 import '../Controllers/SplashScreenController.dart';
 import 'package:get/get.dart';
+import '../Views/TabbarScreen.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -29,6 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(Duration(seconds: 1), () {
+      Get.to(TabbarScreen());
+      return;
+
       final mobileNumber = GetStorage().read(Constants.instance.kMobileNumber) ?? '';
       debugPrint(mobileNumber);
 

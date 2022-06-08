@@ -57,10 +57,6 @@ class OrderPreviewController extends GetxController {
 
       final rateAmount = (conversionPrice.value*inflation_rate.value)/100.0;
 
-      // Buy + krna
-//     sell - krna
-//   inflamation rate in 10%
-
       if (isSell) {
         totalPrice.value = ((conversionPrice.value*purchasePrice.value)-rateAmount-admin_fees.value-other_fees.value).toStringAsFixed(2);
       } else {
