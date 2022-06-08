@@ -124,7 +124,6 @@ class OrderPreview extends StatelessWidget {
               padding: EdgeInsets.only(left: 16, right: 16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                       '${controller.totalPrice.value} INR(D)',
@@ -173,7 +172,7 @@ class OrderPreview extends StatelessWidget {
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
                       Text(
-                          '\$${purchasePrice!}',
+                          paymentMethodCurrency!.contains('INR') ? '₹ ${purchasePrice!}' : '\$${purchasePrice!}',
                           style: TextStylesProductSans.textStyles_16
                               .apply(color: Colors.grey)),
                     ],

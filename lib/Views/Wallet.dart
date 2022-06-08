@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:inr_d/Controllers/WalletController.dart';
+import 'package:inr_d/Styles/ImageStyle.dart';
 import '../Components/AppBarStyle.dart';
 import '../Components/DropdownButtonCustom.dart';
 import '../Components/TextButtonCustom.dart';
@@ -19,6 +20,64 @@ class Wallet extends StatelessWidget {
   Wallet({Key? key}) : super(key: key);
 
   final controller = Get.put(WalletController());
+
+  dropdownButtonCustom(int index) {
+    return DropdownButtonHideUnderline(
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: ColorStyle.primaryColor,
+            borderRadius: BorderRadius.circular(4)
+          ),
+          child: DropdownButton<String>(
+            dropdownColor: Colors.white,
+            isExpanded: true,
+            iconSize: 0,
+            hint: Container(
+              alignment: Alignment.center,
+              child: Text(
+                '+ Add Bank',
+                textAlign: TextAlign.center,
+                style: TextStylesProductSans.textStyles_16.apply(
+                  color: Colors.white,
+                  fontWeightDelta: 1,
+                ),
+              ),
+            ),
+            items: <String>['Your Own Bank', 'Third Party Account'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Container(
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        value,
+                        textAlign: TextAlign.center,
+                        style: TextStylesProductSans.textStyles_16.apply(
+                          color: ColorStyle.grey,
+                          fontWeightDelta: 1,
+                        ),
+                      ),
+                      SizedBox(width: 40,),
+                      Icon(Icons.arrow_forward_ios_sharp, color: ColorStyle.grey, size: 16,)
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+
+            onChanged: (text) {
+              controller.selectedDropDown.value = text!;
+              Get.to(AddBank(
+                title: (text.contains('Own') ? 'Your Own ' : 'Third Party ')+controller.chooseUSD[index],
+                arrBankFormDetails: controller.arrManualDeposit[index],
+              ));
+            },
+          ),
+        )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,19 +195,7 @@ class Wallet extends StatelessWidget {
                           SizedBox(
                             height:26,
                           ),
-                          TextButtonCustom(
-                            text: "+ ADD BANK",
-                            colorBG: ColorStyle.primaryColor,
-                            textStyle: TextStylesProductSans.textStyles_16
-                                .apply(color: Colors.white),
-                            width: MediaQuery.of(context).size.width,
-                            onTap: () {
-                              Get.to(AddBank(
-                                title: controller.chooseUSD[index],
-                                arrBankFormDetails: controller.arrManualDeposit[index],
-                              ));
-                            },
-                          ),
+                          dropdownButtonCustom(index),
                           SizedBox(
                             height:20,
                           ),

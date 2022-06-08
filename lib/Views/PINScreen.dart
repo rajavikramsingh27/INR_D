@@ -184,6 +184,7 @@ class _PINScreenState extends State<PINScreen> {
                                       'Confirm PIN is not same with you setted PIN'
                                           .showError();
                                     } else {
+
                                       controller.setPIN();
                                     }
                                   }
@@ -191,9 +192,9 @@ class _PINScreenState extends State<PINScreen> {
                                   if (textController.text.length > 3) {
                                     controller.pinValue.value = textController.text;
 
-                                    debugPrint('pin pin pin pin pin ');
-                                    debugPrint(controller.pinValue.value.toString());
-                                    debugPrint(controller.pinConfirmValue.value.toString());
+                                    // debugPrint('pin pin pin pin pin ');
+                                    // debugPrint(controller.pinValue.value.toString());
+                                    // debugPrint(controller.pinConfirmValue.value.toString());
 
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => PINScreen(
                                       title: 'Confirm your PIN',

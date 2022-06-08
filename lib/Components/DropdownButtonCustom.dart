@@ -19,9 +19,11 @@ class DropdownButtonCustom extends StatelessWidget {
 
   const DropdownButtonCustom({
     Key? key,
+
     this.onChanged,
     this.listValue,
     this.selectedValue,
+
     this.colorBorder = Colors.red,
     this.bgColor = Colors.white,
     this.padding = EdgeInsets.zero,
@@ -76,6 +78,7 @@ class DropdownButtonCustom extends StatelessWidget {
     );
   }
 }
+
 class DropdownButtonCustomCurrency extends StatelessWidget {
   final Function(String?)? onChanged;
   final List<String>? listValue;

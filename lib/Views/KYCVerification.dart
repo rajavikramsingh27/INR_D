@@ -8,7 +8,7 @@ import 'package:inr_d/Styles/EffectStyle.dart';
 import 'package:inr_d/Styles/ImageStyle.dart';
 
 import 'package:inr_d/Styles/TextStyles.dart';import 'package:inr_d/Views/BankTransfer.dart';
-import 'package:inr_d/Views/YourOwnAUDAccount.dart';
+// import 'package:inr_d/Views/YourOwnAUDAccount.dart';
 
 
 class KYCVerification extends StatelessWidget {
@@ -184,7 +184,6 @@ class KYCVerification extends StatelessWidget {
 
                   ],
                 ),
-
               ],
             ),
             SizedBox(height: 40,),
@@ -196,14 +195,9 @@ class KYCVerification extends StatelessWidget {
                   color: Colors.white
               ),
               onTap: () {
-                Get.to(YourOwnAUDAccount());
+                // Get.to(YourOwnAUDAccount());
               },
             ),
-
-
-
-
-
 
           ],
         ),
