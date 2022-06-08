@@ -22,11 +22,16 @@ class PINScreenController extends GetxController {
     final controlller = Get.put(VerificationCodeController());
     controlller.phoneNumber.value = controlller.phoneNumber.value.replaceAll('+', '');
 
-    final response = await API.instance.post(
-        endPoint: APIEndPoints.instance.kSetPIN, params: {
-          'inrd_no': controlller.phoneNumber.value,
+    final params = {
+      'inrd_no': controlller.phoneNumber.value,
       'mpin': mpin.value,
-        });
+    };
+
+    debugPrint(params.toString());
+
+    final response = await API.instance.post(
+        endPoint: APIEndPoints.instance.kSetPIN, params: params
+    );
 
     debugPrint(response!['status']);
 
@@ -44,6 +49,8 @@ class PINScreenController extends GetxController {
       'inrd_no': mobileNumber,
       'mpin': mpin.value,
     };
+
+    debugPrint(params.toString());
 
     final response = await API.instance.post(
         endPoint: APIEndPoints.instance.kLogin, params: params
