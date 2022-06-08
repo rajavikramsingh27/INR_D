@@ -15,7 +15,6 @@ class BuySellController extends GetxController {
   Rx<TextEditingController> controllerTextEditing = TextEditingController().obs;
 
   reset() {
-    isBuy.value = true;
     controllerTextEditing.value.text = '';
     conversionPrice.value = '0';
     convertedINR.value = '0';

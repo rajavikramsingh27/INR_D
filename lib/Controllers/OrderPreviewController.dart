@@ -55,13 +55,13 @@ class OrderPreviewController extends GetxController {
       debugPrint(other_fees.value.toString());
       debugPrint(inflation_rate.value.toString());
 
-      final rateAmount = (conversionPrice.value*inflation_rate.value)/100.0;
+      // final rateAmount = (conversionPrice.value*inflation_rate.value)/100.0;
 
-      if (isSell) {
-        totalPrice.value = ((conversionPrice.value*purchasePrice.value)-rateAmount-admin_fees.value-other_fees.value).toStringAsFixed(2);
-      } else {
-        totalPrice.value = ((conversionPrice.value*purchasePrice.value)+rateAmount-admin_fees.value-other_fees.value).toStringAsFixed(2);
-      }
+      // if (isSell) {
+      //   totalPrice.value = ((conversionPrice.value*purchasePrice.value)-admin_fees.value-other_fees.value).toStringAsFixed(2);
+      // } else {
+        totalPrice.value = ((conversionPrice.value*purchasePrice.value)-admin_fees.value-other_fees.value).toStringAsFixed(2);
+      // }
       debugPrint(totalPrice.value);
 
     } else if (!response[Constants.instance.kSuccess]) {

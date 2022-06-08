@@ -166,9 +166,7 @@ class _PINScreenState extends State<PINScreen> {
 
                                 if (widget.enterSetConfirmPIN == 0) {
                                   if (textController.text.length > 3) {
-
                                     debugPrint(textController.text);
-
                                     controller.mpin.value = textController.text;
                                     controller.login();
                                   }
