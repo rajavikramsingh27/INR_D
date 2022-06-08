@@ -175,6 +175,7 @@ class _PINScreenState extends State<PINScreen> {
                                 } else if (widget.enterSetConfirmPIN == 1) {
                                   if (textController.text.length > 3) {
                                     controller.pinConfirmValue.value = textController.text;
+                                    controller.mpin.value = textController.text;
 
                                     debugPrint('pin pin pin pin pin ');
                                     debugPrint(controller.pinValue.value.toString());
@@ -184,7 +185,6 @@ class _PINScreenState extends State<PINScreen> {
                                       'Confirm PIN is not same with you setted PIN'
                                           .showError();
                                     } else {
-
                                       controller.setPIN();
                                     }
                                   }

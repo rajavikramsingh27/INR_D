@@ -40,7 +40,7 @@ class API {
       return null;
     }
 
-    debugPrint('${_kBaseURL}${endPoint}');
+    // debugPrint('${_kBaseURL}${endPoint}');
 
     final url = Uri.parse('${_kBaseURL}${endPoint}');
     try {
@@ -67,8 +67,8 @@ class API {
       return null;
     }
 
-    debugPrint('${_kBaseURL}${endPoint}');
-    debugPrint(params.toString());
+    // debugPrint('${_kBaseURL}${endPoint}');
+    // debugPrint(params.toString());
 
     final url = Uri.parse('${_kBaseURL}${endPoint}');
     try {
