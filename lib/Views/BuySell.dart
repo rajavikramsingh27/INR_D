@@ -14,7 +14,8 @@ import '../Utils/Global.dart';
 
 
 class BuySell extends StatelessWidget {
-  BuySell({Key? key}) : super(key: key);
+  final bool isBuy;
+  BuySell({Key? key, required this.isBuy}) : super(key: key);
 
   final controller = Get.put(BuySellController());
 
@@ -65,6 +66,8 @@ class BuySell extends StatelessWidget {
         body: GetBuilder(
           init: BuySellController(),
           initState: (state) {
+
+            controller.isBuy.value = this.isBuy;
             controller.reset();
           },
           builder: (auth) {

@@ -6,8 +6,6 @@ import 'package:inr_d/Components/ListViewHome.dart';
 import 'package:inr_d/Controllers/HomeController.dart';
 import 'package:inr_d/Styles/ImageStyle.dart';
 import '../Components/AppBarStyle.dart';
-import '../Components/TextButtonCustom.dart';
-import '../Controllers/WalletController.dart';
 import '../Styles/ColorStyle.dart';
 import '../Styles/TextStyles.dart';
 import '../Views/BuySell.dart';
@@ -175,7 +173,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Get.to(BuySell());
+                          Get.to(BuySell(isBuy: true,));
                         },
                       ),),
                       Expanded(child: InkWell(
@@ -199,7 +197,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Get.to(BuySell());
+                          Get.to(BuySell(isBuy: false,));
                         },
                       )),
                     ],

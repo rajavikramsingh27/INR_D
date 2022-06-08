@@ -72,6 +72,7 @@ class Wallet extends StatelessWidget {
               Get.to(AddBank(
                 title: (text.contains('Own') ? 'Your Own ' : 'Third Party ')+controller.chooseUSD[index],
                 arrBankFormDetails: controller.arrManualDeposit[index],
+                isOwn: text.contains('Own') ? true : false ,
               ));
             },
           ),

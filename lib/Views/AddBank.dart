@@ -16,11 +16,13 @@ import '../Utils/Global.dart';
 class AddBank extends StatelessWidget {
   final String? title;
   final List<String> arrBankFormDetails;
+  final bool? isOwn;
 
   AddBank({
     Key? key,
     required this.title,
     required this.arrBankFormDetails,
+    required this.isOwn,
   }) : super(key: key);
 
   final controller = Get.put(AddBankController());
@@ -185,13 +187,17 @@ class AddBank extends StatelessWidget {
                       },
 
                     ),
+                    if (!this.isOwn!)
                     SizedBox(
                       height: 16,
                     ),
+                    if (!this.isOwn!)
                     dropdownButtonCustom(),
+                    if (!this.isOwn!)
                     SizedBox(
                       height: 16,
                     ),
+                    if (!this.isOwn!)
                     frontBack(),
                     SizedBox(
                       height: 16,
