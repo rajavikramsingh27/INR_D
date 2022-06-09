@@ -90,7 +90,9 @@ class AddCurrency extends StatelessWidget {
                 TextFieldCustomOutline(
                   padding: EffectStyle.padding(10, 10, 10, 10),
                   hintText: 'Ex.\$320',
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.numberWithOptions(
+                    decimal: true
+                  ),
                   textStyle: TextStylesProductSans.textStyles_14.apply(
                     color: Colors.black,
                     fontWeightDelta: 1,

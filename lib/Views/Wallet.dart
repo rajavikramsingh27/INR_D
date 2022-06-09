@@ -196,7 +196,13 @@ class Wallet extends StatelessWidget {
                           SizedBox(
                             height:26,
                           ),
+                          if (index ==3)
                           dropdownButtonCustom(index),
+                          if (index !=3)
+                            IgnorePointer(
+                              ignoring: true,
+                              child: dropdownButtonCustom(index),
+                            ),
                           SizedBox(
                             height:20,
                           ),
