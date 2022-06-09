@@ -6,6 +6,7 @@ import '../Components/AppBarStyle.dart';
 import '../Components/DropdownButtonCustom.dart';
 import '../Components/TextButtonCustom.dart';
 import '../Components/TextFieldCustomOutline.dart';
+import '../Controllers/TabbarScreenController.dart';
 import '../Styles/ColorStyle.dart';
 import '../Styles/EffectStyle.dart';
 import '../Styles/TextStyles.dart';
@@ -20,6 +21,7 @@ class AddCurrency extends StatelessWidget {
 
   final controllerDepositMoney = Get.put(DepositMoneyController());
   final controller = Get.put(AddCurrencyController());
+  final controllerTabbarScreen = Get.put(TabbarScreenController());
 
   String titleManualDeposit = '';
   int indexManualDeposit = 0;
@@ -41,6 +43,12 @@ class AddCurrency extends StatelessWidget {
       appBar: AppBarStyle(
         overlayStyle: SystemUiOverlayStyle.dark,
         title: 'Add Currency',
+        leading: BackButton(
+          color: ColorStyle.grey,
+          onPressed: () {
+            controllerTabbarScreen.index.value = 0;
+          },
+        ),
       ),
       body: GetBuilder(
         init: AddCurrencyController(),

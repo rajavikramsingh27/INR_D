@@ -31,6 +31,7 @@ class TabbarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(TabbarScreenController());
+
     return GetBuilder(
       init: TabbarScreenController(),
       builder: (auth) {
