@@ -43,6 +43,8 @@ dependencies:
   connectivity: ^3.0.6
   flutter_html_all: ^3.0.0-alpha.3
   flutter_html: ^3.0.0-alpha.3
+  image_picker: ^0.8.5+3
+  intl: ^0.17.0
 
 
 dev_dependencies:

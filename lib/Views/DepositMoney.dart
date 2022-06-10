@@ -104,7 +104,9 @@ class DepositMoney extends StatelessWidget {
                       onTap: () {
                         isOwn = (index == 0) ? true : false;
                         Get.back();
-                        alert();
+                        if (currencyName.toLowerCase().contains('inr')) {
+                          alert();
+                        }
                       },
                     );
                   },
